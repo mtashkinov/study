@@ -1,5 +1,5 @@
 /* Tashkinov Mikhail (c) 2013
-   List realization
+   Tree implementation
 */
 
 #include <malloc.h>
