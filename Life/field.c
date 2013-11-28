@@ -52,7 +52,7 @@ World Scan(FILE * input)
         source.field[i][j] = DEAD;
       }
     }
-	fscanf(input, "%c", &c);
+    fscanf(input, "%c", &c);
   }
   
   fclose(input);

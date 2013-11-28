@@ -56,7 +56,7 @@ int main(int argc, char ** argv)
   if (err == OK)
   {
     source = Scan(input);
-	source = Play(source);
+    source = Play(source);
     Del(source.field, source.hieght);
   }
   else

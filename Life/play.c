@@ -119,11 +119,11 @@ int Is_stop(World source, Cell ** next)
   {
     j = 0;
     while ((isStop) && (j < source.width))
-	{
+    {
       isStop = (source.field[i][j] == next[i][j]);
       ++j;
-	}
-	++i;
+    }
+    ++i;
   }
   
   if (isStop == 0)
@@ -133,17 +133,17 @@ int Is_stop(World source, Cell ** next)
     {
       j = 0;
       while ((isStop) && (j < source.width))
-	  {
+      {
         isStop = (source.field[i][j] == DEAD);
         ++j;
-	  }
-	  ++i;
+      }
+      ++i;
     }
   }
   
   return (isStop);
 }
-
+    
 World Play(World source)
 {
   Cell ** next = Create(source.hieght, source.width);
