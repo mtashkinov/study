@@ -5,42 +5,44 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "play.h"
-#include "field.h"
+
+#define SLEEP_TIME 500
 
 int Count_neighbors(World source, int i, int j)
 {
   int neighborsNum = 0;
   
-  if (source.field[(i - 1 + source.size) % source.size][(j - 1 + source.size) % source.size] == ALIVE)
+  if (source.field[(i - 1 + source.hieght) % source.hieght][(j - 1 + source.width) % source.width] == ALIVE)
   {
     ++neighborsNum;
   }
-  if (source.field[(i - 1 + source.size) % source.size][j] == ALIVE)
+  if (source.field[(i - 1 + source.hieght) % source.hieght][j] == ALIVE)
   {
     ++neighborsNum;
   }
-  if (source.field[(i - 1 + source.size) % source.size][(j + 1) % source.size] == ALIVE)
+  if (source.field[(i - 1 + source.hieght) % source.hieght][(j + 1) % source.width] == ALIVE)
   {
     ++neighborsNum;
   }
-  if (source.field[i][(j - 1 + source.size) % source.size] == ALIVE)
+  if (source.field[i][(j - 1 + source.width) % source.width] == ALIVE)
   {
     ++neighborsNum;
   }
-  if (source.field[i][(j + 1) % source.size] == ALIVE)
+  if (source.field[i][(j + 1) % source.width] == ALIVE)
   {
     ++neighborsNum;
   }
-  if (source.field[(i + 1) % source.size][(j - 1 + source.size) % source.size] == ALIVE)
+  if (source.field[(i + 1) % source.hieght][(j - 1 + source.width) % source.width] == ALIVE)
   {
     ++neighborsNum;
   }
-  if (source.field[(i + 1) % source.size][j] == ALIVE)
+  if (source.field[(i + 1) % source.hieght][j] == ALIVE)
   {
     ++neighborsNum;
   }
-  if (source.field[(i + 1) % source.size][(j + 1) % source.size] == ALIVE)
+  if (source.field[(i + 1) % source.hieght][(j + 1) % source.width] == ALIVE)
   {
     ++neighborsNum;
   }
@@ -53,9 +55,9 @@ void Next_turn(World source, Cell ** next)
   int i, j;
   int neighborsNum;
   
-  for (i = 0; i < source.size; ++i)
+  for (i = 0; i < source.hieght; ++i)
   {
-    for (j = 0; j < source.size; ++j)
+    for (j = 0; j < source.width; ++j)
     {
       neighborsNum = Count_neighbors(source, i, j);
       if (source.field[i][j] == DEAD)
@@ -90,9 +92,9 @@ void Print_field(World source)
   char c;
 
   system("cls");
-  for (i = 0; i < source.size; ++i)
+  for (i = 0; i < source.hieght; ++i)
   {
-    for (j = 0; j < source.size; ++j)
+    for (j = 0; j < source.width; ++j)
     {
       if (source.field[i][j] == ALIVE)
       {
@@ -105,7 +107,7 @@ void Print_field(World source)
     }
     printf("\n");
   }
-  scanf("%c", &c);
+  Sleep((DWORD)SLEEP_TIME);
 }
 
 int Is_stop(World source, Cell ** next)
@@ -113,10 +115,10 @@ int Is_stop(World source, Cell ** next)
   int isStop = 1;
   int i = 0, j;
   
-  while ((isStop) && (i < source.size))
+  while ((isStop) && (i < source.hieght))
   {
     j = 0;
-    while ((isStop) && (j < source.size))
+    while ((isStop) && (j < source.width))
 	{
       isStop = (source.field[i][j] == next[i][j]);
       ++j;
@@ -127,10 +129,10 @@ int Is_stop(World source, Cell ** next)
   if (isStop == 0)
   {
     isStop = 1;
-    while ((isStop) && (i < source.size))
+    while ((isStop) && (i < source.hieght))
     {
       j = 0;
-      while ((isStop) && (j < source.size))
+      while ((isStop) && (j < source.width))
 	  {
         isStop = (source.field[i][j] == DEAD);
         ++j;
@@ -142,21 +144,24 @@ int Is_stop(World source, Cell ** next)
   return (isStop);
 }
 
-void Play(World source)
+World Play(World source)
 {
-  Cell ** next = Create(source.size);
+  Cell ** next = Create(source.hieght, source.width);
   Cell ** temp;
   
-  Print_field(source);
   do
   {
+    Print_field(source);
     Next_turn(source, next);
 
     temp = next;
     next = source.field;
     source.field = temp;
 
-    Print_field(source);
   }
   while (Is_stop(source, next) != 1);
+  
+  Del(next, source.hieght);
+
+  return source;
 }

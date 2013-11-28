@@ -14,7 +14,8 @@ typedef enum Cell
 
 typedef struct World
 {
-  int size;
+  int hieght;
+  int width;
   Cell ** field;
 } World;
 

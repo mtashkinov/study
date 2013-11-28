@@ -4,25 +4,25 @@
 
 #include "field.h"
 
-Cell ** Create(int size)
+Cell ** Create(int hieght, int width)
 {
   int i;
   
-  Cell ** field = (Cell **)malloc(size * sizeof(Cell *));
+  Cell ** field = (Cell **)malloc(hieght * sizeof(Cell *));
   
-  for (i = 0; i < size; ++i)
+  for (i = 0; i < hieght; ++i)
   {
-    field[i] = (Cell *)malloc(size * sizeof(Cell));
+    field[i] = (Cell *)malloc(width * sizeof(Cell));
   }
 
   return field;
 }
 
-void Del(Cell ** field,int size)
+void Del(Cell ** field, int hieght)
 {
   int i;
   
-  for (i = 0; i < size; ++i)
+  for (i = 0; i < hieght; ++i)
   {
     free(field[i]);
   }
@@ -34,13 +34,13 @@ World Scan(FILE * input)
   World source;
   char c;
   int i, j;
+
+  fscanf(input, "%d%d", &source.hieght, &source.width);
+  source.field = Create(source.hieght, source.width);
   
-  fscanf(input, "%d%c", &source.size, &c);
-  source.field = Create(source.size);
-  
-  for (i = 0; i < source.size; ++i)
+  for (i = 0; i < source.hieght; ++i)
   {
-    for (j = 0; j < source.size; ++j)
+    for (j = 0; j < source.width; ++j)
     {
       fscanf(input, "%c", &c);
       if (c == '#')
@@ -54,6 +54,8 @@ World Scan(FILE * input)
     }
 	fscanf(input, "%c", &c);
   }
+  
+  fclose(input);
   
   return source;
 }

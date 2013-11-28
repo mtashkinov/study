@@ -4,6 +4,8 @@
 #ifndef PLAY_H
 #define PLAY_H
 
-void Play(World);
+#include "field.h"
+
+World Play(World);
 
 #endif
