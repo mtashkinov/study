@@ -2,7 +2,10 @@
    Implementation of Create and Del
 */
 
+#include <windows.h>
 #include "field.h"
+
+#define SLEEP_TIME 250
 
 Cell ** Create(int hieght, int width)
 {
@@ -58,4 +61,31 @@ World Scan(FILE * input)
   fclose(input);
   
   return source;
+}
+
+void Print_field(World source, Cell ** prev)
+{
+  int i, j;
+  char c;
+
+  for (i = 0; i < source.hieght; ++i)
+  {
+    for (j = 0; j < source.width; ++j)
+    {
+      if (source.field[i][j] != prev[i][j])
+      {
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD) {j, i});
+        if (source.field[i][j] == ALIVE)
+        {
+          printf("#");
+        }
+        else
+        {
+          printf(" ");
+        }
+      }
+    }
+    printf("\n");
+  }
+  Sleep((DWORD)SLEEP_TIME);
 }

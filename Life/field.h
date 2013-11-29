@@ -19,8 +19,9 @@ typedef struct World
   Cell ** field;
 } World;
 
-Cell ** Create(int);
+Cell ** Create(int, int);
 void Del(Cell **, int);
 World Scan(FILE *);
+void Print_field(World, Cell **);
 
 #endif

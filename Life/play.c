@@ -5,10 +5,7 @@
 #include <malloc.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <windows.h>
 #include "play.h"
-
-#define SLEEP_TIME 500
 
 int Count_neighbors(World source, int i, int j)
 {
@@ -86,30 +83,6 @@ void Next_turn(World source, Cell ** next)
   }
 }
 
-void Print_field(World source)
-{
-  int i, j;
-  char c;
-
-  system("cls");
-  for (i = 0; i < source.hieght; ++i)
-  {
-    for (j = 0; j < source.width; ++j)
-    {
-      if (source.field[i][j] == ALIVE)
-      {
-        printf("#");
-      }
-      else
-      {
-        printf(".");
-      }
-    }
-    printf("\n");
-  }
-  Sleep((DWORD)SLEEP_TIME);
-}
-
 int Is_stop(World source, Cell ** next)
 {
   int isStop = 1;
@@ -151,7 +124,7 @@ World Play(World source)
   
   do
   {
-    Print_field(source);
+    Print_field(source, next);
     Next_turn(source, next);
 
     temp = next;
