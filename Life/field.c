@@ -38,7 +38,7 @@ World Scan(FILE * input)
   char c;
   int i, j;
 
-  fscanf(input, "%d%d", &source.hieght, &source.width);
+  fscanf(input, "%d%d%c", &source.hieght, &source.width, &c);
   source.field = Create(source.hieght, source.width);
   
   for (i = 0; i < source.hieght; ++i)
@@ -74,7 +74,7 @@ void Print_field(World source, Cell ** prev)
     {
       if (source.field[i][j] != prev[i][j])
       {
-        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD) {j, i});
+        SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD) {j , i});
         if (source.field[i][j] == ALIVE)
         {
           printf("#");

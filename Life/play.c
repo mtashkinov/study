@@ -122,15 +122,15 @@ World Play(World source)
   Cell ** next = Create(source.hieght, source.width);
   Cell ** temp;
   
+  Print_field(source, next);
   do
   {
-    Print_field(source, next);
     Next_turn(source, next);
 
     temp = next;
     next = source.field;
     source.field = temp;
-
+	Print_field(source, next);
   }
   while (Is_stop(source, next) != 1);
   
