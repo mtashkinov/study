@@ -2,10 +2,10 @@
    List elements filter
 *)
 
-let rec filter list =
+let rec filter f list =
     match list with
     | [] -> []
-    | head :: tail -> if head > 2 then filter tail
-                      else head :: filter tail
+    | head :: tail -> if (f head) then head :: filter f tail
+                      else filter f tail
 let list = [0; 4; 2; 1; 5]
-printfn "%A" (filter list)
+printfn "%A" (filter (fun x -> x > 2) list)
