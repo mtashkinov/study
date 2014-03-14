@@ -2,13 +2,13 @@
    Map at CPS
 *)
 
-let func s f a = s (f a)
+let sqr'cps x s = s (x * x);
 
 let rec map f l g =
     match l with
     | [] -> g []
-    | hd :: tl -> map f tl (fun x -> g ((f hd) :: x))
+    | hd :: tl -> f hd (fun x -> map f tl (fun y -> g (x :: y)))
 
-let l = [1; 2; 3; 4]
+let l = [2..5]
 
-map (func (printfn "%A") (fun x -> x * x)) l (printfn "%A")
+map sqr'cps l (printfn "%A")
