@@ -47,23 +47,38 @@ type Expr =
     | Mul of Expr * Expr
     | Div of Expr * Expr
 
-let reduction f g k x y =
-    let a = f x in 
-        let b = f y in
-            match a with
-            | Const c -> match b with
-                         | Const d -> Const (k c d)
-                         | _ -> g (a, b)
-            |_ -> g (a, b)
-    
-
 let rec calc expr =
     match expr with
     | Const x -> Const x
     | Var s -> Var s
-    | Add (x, y) -> reduction calc Add (+) x y
-    | Sub (x, y) -> reduction calc Sub (-) x y
-    | Mul (x, y) -> reduction calc Mul (*) x y
-    | Div (x, y) -> reduction calc Div (/) x y
 
-printfn "%A" (calc (Mul ((Add (Const 1, Const 2)), (Add (Var "x", Const 2)))))
+    | Add (Const x, Const y) -> Const (x + y)
+    | Add (Const 0, x) -> calc x
+    | Add (x, Const 0) -> calc x
+    | Add (x, y) -> let a = calc x
+                    let b = calc y
+                    Add (a, b)
+
+    | Sub (Const x, Const y) -> Const (x - y)
+    | Sub (Var x, Var y) -> if (x = y) then Const 0
+                            else Sub (Var x, Var y)
+    | Sub (x, y) -> let a = calc x
+                    let b = calc y
+                    Sub (a, b)
+
+    | Mul (Const x, Const y) -> Const (x * y)
+    | Mul (Const 0, x) -> Const 0
+    | Mul (x, Const 0) -> Const 0
+    | Mul (Const 1, x) -> calc x
+    | Mul (x, Const 1) -> calc x
+    | Mul (x, y) -> let a = calc x
+                    let b = calc y
+                    Mul (a, b)
+
+    | Div (Const x, Const y) -> Const (x / y)
+    | Div (x, Const 1) -> calc x
+    | Div (x, y) -> let a = calc x
+                    let b = calc y
+                    Div (a, b)
+  
+printfn "%A" (calc  (Mul (Add (Var "x", Const 0), Var "c")))
