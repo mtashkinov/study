@@ -2,6 +2,8 @@
    Intersect of sets
 *)
 
+module Intersect
+
 let eps = 0.0001
 
 let compare x y = abs(x - y) < eps
@@ -57,10 +59,12 @@ let vertLineIntersectVertLine x1 x2 =
     else NoPoint
 
 let vertLineIntersectLineSegment x x1 y1 x2 y2 =
-    if ((x >= x1) && (x <= x2)) || ((x <= x1) && (x >= x2)) then
-        let y = (x - x1) * (y2 - y1) / (x2 - x1) + y1
-        Point (x, y)
-    else NoPoint
+    if (x = x1) && (x = x2) then LineSegment ((x1, y1), (x2, y2))
+    else
+        if ((x >= x1) && (x <= x2)) || ((x <= x1) && (x >= x2)) then
+            let y = (x - x1) * (y2 - y1) / (x2 - x1) + y1
+            Point (x, y)
+        else NoPoint
 
 let segmentEquation f x y x1 y1 x2 y2 = f ((y - y1) * (x2 - x1)) ((x - x1) * (y2 - y1))
 
