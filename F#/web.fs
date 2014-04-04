@@ -10,10 +10,22 @@ open System
 let urls =
     [
      "http://yandex.ru";
-     "http://google.ru"
+     "http://google.com";
     ]
 
 let n = 2
+
+let rec isInclude x l =
+    match l with
+    | [] -> false
+    | hd::tl -> if hd = x then true
+                          else isInclude x tl
+
+let rec merge l1 l2 =
+    match l1 with
+    | [] -> l2
+    | hd :: tl -> if isInclude hd l2 then merge tl l2
+                                     else hd :: merge tl l2    
 
 let rec imagesCount (s:string) (pos:int) =
     let count = 0
@@ -35,7 +47,9 @@ let rec getImages (s:string) (pos:int) =
 let rec imgParse urls g =
     match urls with
     | [] -> g []
-    | hd :: tl -> getUrl hd (fun x -> imgParse tl (fun y -> g (getImages x 0 @ y)))
+    | hd :: tl -> getUrl hd (fun x -> imgParse tl (fun y -> g << Seq.toList << Seq.distinct <| (getImages x 0) @ y))
 
 imgParse urls (printfn "%A")
+
+//printfn "%A" (merge [1; 2] [2])
 Console.ReadLine()
