@@ -1,3 +1,7 @@
+(* Tashkinov Mikhail (c) 2014
+   OOP example
+*)
+
 module Students
 
 open System
