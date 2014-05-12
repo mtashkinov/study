@@ -57,14 +57,16 @@ let rec calc expr =
     | Add (x, Const 0) -> calc x
     | Add (x, y) -> let a = calc x
                     let b = calc y
-                    calc (Add (a, b))
+                    if (x = a) && (y = b) then Add (a, b)
+                                          else calc (Add (a, b))
 
     | Sub (Const x, Const y) -> Const (x - y)
     | Sub (Var x, Var y) -> if (x = y) then Const 0
                             else Sub (Var x, Var y)
     | Sub (x, y) -> let a = calc x
                     let b = calc y
-                    calc (Sub (a, b))
+                    if (x = a) && (y = b) then Sub (a, b)
+                                          else calc (Sub (a, b))
 
     | Mul (Const x, Const y) -> Const (x * y)
     | Mul (Const 0, x) -> Const 0
@@ -73,12 +75,14 @@ let rec calc expr =
     | Mul (x, Const 1) -> calc x
     | Mul (x, y) -> let a = calc x
                     let b = calc y
-                    calc (Mul (a, b))
+                    if (x = a) && (y = b) then Mul (a, b)
+                                          else calc (Mul (a, b))
 
     | Div (Const x, Const y) -> Const (x / y)
     | Div (x, Const 1) -> calc x
     | Div (x, y) -> let a = calc x
                     let b = calc y
-                    calc (Div (a, b))
+                    if (x = a) && (y = b) then Div (a, b)
+                                          else calc (Div (a, b))
   
 printfn "%A" (calc (Add (Add (Const 3, Const 5), (Add (Const 4, Const 5)))))
