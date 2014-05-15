@@ -198,17 +198,7 @@ module Map =
                                         add' tl
             Map<_, _>(!(add' (Seq.toList x)))
 
-        override this.Equals(x: obj) =
-            let rec toKeyList = function
-                | Empty -> [] 
-                | Node(l, r, k, _, _, _) -> toKeyList l @ k :: toKeyList r
-            let keyList = toKeyList t
-            let rec compare (m: Map<'key, 'value>) = function
-                | [] -> true
-                | hd :: tl -> match m.TryFind(hd) with
-                              | None -> false
-                              | Some r -> (r = this.[hd]) && compare m tl
-                        
+        override this.Equals(x: obj) =                        
             match x with
-            | :? Map<'key, 'value> as y -> (y.Count = this.Count) && (compare y keyList)
+            | :? Map<'key, 'value> as y -> (y.Count = this.Count) && (Seq.forall2 (=) this y)
             | _ -> false
