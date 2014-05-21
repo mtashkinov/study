@@ -23,28 +23,29 @@ module Map =
         | x :: tl -> 
             match tl with
             | [] -> failwith "Incorrect way to balance"
-            | y :: tl -> if x = y then 
-                            if x then 
-                                match tree with
-                                | Node(s, Node(l, r, b1, b2, blh, brh), a1, a2, alh, arh) -> 
-                                  node (Node(s, l, a1, a2, alh, blh)) r b1 b2
-                                | _ -> failwith "Incorrect tree to balance"
-                            else 
-                                match tree with
-                                | Node(Node(r, l, b1, b2, blh, brh), s, a1, a2, alh, arh) -> 
-                                  node r (Node(l, s, a1, a2, brh, arh)) b1 b2
-                                | _ -> failwith "Incorrect tree to balance"
-                         else 
-                            if x then 
-                                match tree with
-                                | Node(s, Node(Node(p, q, c1, c2, clh, crh), r, b1, b2, blh, brh), a1, a2, alh, arh) -> 
-                                  node (Node(s, p, a1, a2, alh, clh)) (Node(q, r, b1, b2, crh, brh)) c1 c2
-                                | _ -> failwith "Incorrect tree to balance"
-                            else 
-                                match tree with
-                                | Node(Node(r, Node(p, q, c1, c2, clh, crh), b1, b2, blh, brh), s, a1, a2, alh, arh) -> 
-                                  node (Node(r, p, b1, b2, blh, clh)) (Node(q, s, a1, a2, crh, arh)) c1 c2
-                                | _ -> failwith "Incorrect tree to balance"
+            | y :: tl -> 
+                if x = y then 
+                    if x then 
+                        match tree with
+                        | Node(s, Node(l, r, b1, b2, blh, brh), a1, a2, alh, arh) -> 
+                            node (Node(s, l, a1, a2, alh, blh)) r b1 b2
+                        | _ -> failwith "Incorrect tree to balance"
+                    else 
+                        match tree with
+                        | Node(Node(r, l, b1, b2, blh, brh), s, a1, a2, alh, arh) -> 
+                            node r (Node(l, s, a1, a2, brh, arh)) b1 b2
+                        | _ -> failwith "Incorrect tree to balance"
+                else 
+                    if x then 
+                        match tree with
+                        | Node(s, Node(Node(p, q, c1, c2, clh, crh), r, b1, b2, blh, brh), a1, a2, alh, arh) -> 
+                            node (Node(s, p, a1, a2, alh, clh)) (Node(q, r, b1, b2, crh, brh)) c1 c2
+                        | _ -> failwith "Incorrect tree to balance"
+                    else 
+                        match tree with
+                        | Node(Node(r, Node(p, q, c1, c2, clh, crh), b1, b2, blh, brh), s, a1, a2, alh, arh) -> 
+                            node (Node(r, p, b1, b2, blh, clh)) (Node(q, s, a1, a2, crh, arh)) c1 c2
+                        | _ -> failwith "Incorrect tree to balance"
 
     let private findNextStep t x =
         match t with
@@ -54,24 +55,27 @@ module Map =
     let rec private add tree x y =
         match tree with
         | Empty -> Node(Empty, Empty, x, y, 0, 0)
-        | Node(a, b, m, n, hl, hr) -> if x > m then 
-                                          let mutable h = hr + 1
-                                          let c = add b x y
-                                          match c with
-                                          | Empty -> h <- 0
-                                          | Node(_, _, _, _, l, r) -> h <- max l r + 1
-                                          let mutable tr = Node(a, c, m, n, hl, h)
-                                          if h > hl + 1 then tr <- balance tr (true :: (findNextStep b x))
-                                          tr
-                                       else 
-                                           let mutable h = hl + 1
-                                           let c = add a x y
-                                           match c with
-                                           | Empty -> h <- 0
-                                           | Node(_, _, _, _, l, r) -> h <- max l r + 1
-                                           let mutable tr = Node(c, b, m, n, h, hr)
-                                           if h > hr + 1 then tr <- balance tr (false :: (findNextStep a x))
-                                           tr
+        | Node(a, b, m, n, hl, hr) ->
+            if x = m then Node(a, b, m, y, hl, hr)
+            else
+                if x > m then
+                    let mutable h = hr + 1
+                    let c = add b x y
+                    match c with
+                    | Empty -> h <- 0
+                    | Node(_, _, _, _, l, r) -> h <- max l r + 1
+                    let mutable tr = Node(a, c, m, n, hl, h)
+                    if h > hl + 1 then tr <- balance tr (true :: (findNextStep b x))
+                    tr
+                else 
+                    let mutable h = hl + 1
+                    let c = add a x y
+                    match c with
+                    | Empty -> h <- 0
+                    | Node(_, _, _, _, l, r) -> h <- max l r + 1
+                    let mutable tr = Node(c, b, m, n, h, hr)
+                    if h > hr + 1 then tr <- balance tr (false :: (findNextStep a x))
+                    tr
 
     type Map<'key, 'value  when 'key: comparison and 'value: equality>private(t:Tree<'key, 'value>) = 
         member this.Add(x: 'key, y: 'value) = new Map<_, _>(add t x y)
@@ -206,8 +210,8 @@ module Map =
                 member this.Current = current() :> obj
 
                 member this.MoveNext() =
-                    if !isStart then isStart := false
-                    curList := (!curList).Tail
+                    if !isStart then isStart := false                
+                    else curList := (!curList).Tail
                     not (!curList).IsEmpty
 
                 member this.Reset() = 
