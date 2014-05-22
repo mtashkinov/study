@@ -111,6 +111,7 @@ let answer s =
     do tb.Width <- width - btWDelt - delt
     let btOk = new Button(Text = "Ok", Top = height - btHDelt - btHeight, Left = width / 2 - btWidth / 2)
     btOk.Click.Add (fun _ -> frm.Close())
+    btOk.KeyDown.Add(fun x -> if x.KeyCode = Keys.Enter then frm.Close())
     frm.Controls.AddRange [| tb; btOk; |]
     frm.Show()
 
@@ -122,11 +123,17 @@ let send =
     let btSend = new Button(Text = "Send", Top = height - btHDelt - btHeight, Left = width - btWDelt - btWidth)
     do btSend.Size <- new System.Drawing.Size(btWidth, btHeight)
     let btClose = new Button(Text = "Close", Top = height - btHDelt - btHeight, Left = delt)
-    btClose.Click.Add (fun _ -> frm.Close()
-                                Application.Exit())
-    btSend.Click.Add (fun _ -> let s = tb.Text
-                               tb.Clear()
-                               answer s)
+    let answ() =
+        let s = tb.Text
+        tb.Clear()
+        answer s
+    let close() =
+        frm.Close()
+        Application.Exit()
+    btClose.Click.Add (fun _ -> close())
+    btSend.Click.Add (fun _ -> answ())
+    tb.KeyDown.Add(fun x -> if x.KeyCode = Keys.Escape then close())
+    tb.KeyDown.Add(fun x -> if x.KeyCode = Keys.Enter then answ())
     frm.Controls.AddRange [| tb; btClose; btSend |]
     frm.Show()
 
