@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>FsCheck.Nunit</id>
+    <version>1.0.2</version>
+    <title>FsCheck.Nunit</title>
+    <authors>Kurt Schelfthout and contributors</authors>
+    <owners>Kurt Schelfthout and contributors</owners>
+    <licenseUrl>https://github.com/fsharp/FsCheck/blob/master/License.txt</licenseUrl>
+    <projectUrl>https://github.com/fsharp/FsCheck</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Integrates FsCheck with NUnit by adding a PropertyAttribute that runs FsCheck tests.</description>
+    <summary>Integrates FsCheck with NUnit</summary>
+    <releaseNotes>Moved default Arb registration to Arb module. This should fix issues
+folks have been having with the default generators not being registered in time.</releaseNotes>
+    <copyright>Copyright 2012</copyright>
+    <tags>test testing random fscheck quickcheck nunit</tags>
+    <dependencies>
+      <dependency id="NUnit" version="2.6.3" />
+      <dependency id="NUnit.Runners" version="2.6.3" />
+      <dependency id="FsCheck" version="1.0.2" />
+    </dependencies>
+  </metadata>
+</package>
