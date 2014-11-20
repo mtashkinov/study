@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "PartlyCloudy", "PartlyCloudy\PartlyCloudy.fsproj", "{90265273-8FD5-4FE5-8AC4-CC1046444477}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "Tests\Tests.fsproj", "{D3284DC7-5EF4-4F10-B99A-A1183A73B730}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{108E6DE4-D3E2-4BB6-BB9D-F40111C8E25D}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90265273-8FD5-4FE5-8AC4-CC1046444477}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90265273-8FD5-4FE5-8AC4-CC1046444477}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90265273-8FD5-4FE5-8AC4-CC1046444477}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90265273-8FD5-4FE5-8AC4-CC1046444477}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3284DC7-5EF4-4F10-B99A-A1183A73B730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3284DC7-5EF4-4F10-B99A-A1183A73B730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3284DC7-5EF4-4F10-B99A-A1183A73B730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3284DC7-5EF4-4F10-B99A-A1183A73B730}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

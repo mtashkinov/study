@@ -1,0 +1,9 @@
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\bin\Debug\PartlyCloudy.exe.config
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\bin\Debug\PartlyCloudy.XML
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\bin\Debug\PartlyCloudy.exe
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\bin\Debug\PartlyCloudy.pdb
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\bin\Debug\FSharp.Core.dll
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\bin\Debug\FSharp.Core.xml
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\bin\Debug\ru\FSharp.Core.resources.dll
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\obj\Debug\PartlyCloudy.exe
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\PartlyCloudy\PartlyCloudy\obj\Debug\PartlyCloudy.pdb
