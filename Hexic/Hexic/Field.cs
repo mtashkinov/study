@@ -44,7 +44,7 @@ namespace Hexic
         private int m, n, k;
         private Random random;
 
-        private const int COLORS_NUM = 5;
+        private const int COLORS_NUM = 7;
 
         public int getWidth()
         {
@@ -99,34 +99,6 @@ namespace Hexic
             return points;
         }
 
-        private bool isForDelete(int x, int y)
-        {
-            Colour curColor = field[x, y];
-            int[,] group = getRotationGroup(GroupType.ONE, x, y);
-            bool res1 = true;
-            bool res2 = true;
-
-            for (int i = 0; i < 3; ++i)
-            {
-                if (!verify(group[0, i], group[1, i]) || (field[group[0, i], group[1, i]] != curColor))
-                {
-                    res1 = false;
-                }
-            }
-
-            group = getRotationGroup(GroupType.TWO, x, y);
-
-            for (int i = 0; i < 3; ++i)
-            {
-                if (!verify(group[0, i], group[1, i]) || (field[group[0, i], group[1, i]] != curColor))
-                {
-                    res2 = false;
-                }
-            }
-
-            return res1 || res2;
-        }
-
         private int[,] getRotationGroup(GroupType groupType, int x, int y)
         {
             int posForInc;
@@ -159,7 +131,6 @@ namespace Hexic
                     ++ys[i];
                 }
             }
-
             return new int[2, 3] {{xs[0], xs[1], xs[2]}, {ys[0], ys[1], ys[2]}};
         }
 
@@ -169,10 +140,7 @@ namespace Hexic
             for (int i = 0; i < 3; ++i)
             {
                 clearCurSeq();
-                if (isForDelete(group[0, i], group[1, i]))
-                {
-                    sum += countPoints(countNeighborsWithSameColour(group[0, i], group[1, i]));
-                }
+                sum += countPoints(countNeighborsWithSameColour(group[0, i], group[1, i]));
             }
             return sum;
         }
@@ -238,24 +206,32 @@ namespace Hexic
         private int prepare()
         {
             bool isRemoval;
+            bool[,] forDelete;
             int points = 0;
+            int hexSeq;
 
             do
             {
+                forDelete = new bool[n, m];
                 isRemoval = false;
-                clearCurSeq();
                 for (int i = 0; i < n; ++i)
                 {
                     for (int j = 0; j < m; ++j)
                     {
-                        if (isForDelete(i, j))
+                        clearCurSeq();
+                        if (!forDelete[i, j])
                         {
-                            points += countPoints(countNeighborsWithSameColour(i, j));
-                            isRemoval = true;
+                            hexSeq = countNeighborsWithSameColour(i, j);
+                            points += countPoints(hexSeq);
+                            if (hexSeq > 2)
+                            {
+                                isRemoval = true;
+                                merge(forDelete, curSeq);
+                            }
                         }
                     }
                 }
-                deleteHexs();
+                deleteHexs(forDelete);
                 regen();
             }
             while (isRemoval);
@@ -263,7 +239,18 @@ namespace Hexic
             return points;
         }
 
-        private void deleteHexs()
+        private void merge(bool[,] array1, bool[,] array2)
+        {
+            for (int i = 0; i < n; ++i)
+            {
+                for (int j = 0; j < n; ++j)
+                {
+                    array1[i, j] = array1[i, j] || array2[i, j];
+                }
+            }
+        }
+
+        private void deleteHexs(bool[,] marked)
         {
             for (int i = 0; i < n; ++i)
             {
@@ -274,13 +261,13 @@ namespace Hexic
                     int seq = 0;
                     int seqStart;
 
-                    while ((j < m - neededFields[i]) && (!curSeq[i, j]))
+                    while ((j < m - neededFields[i]) && (!marked[i, j]))
                     {
                         ++j;
                     }
 
                     seqStart = j;
-                    while ((j < m - neededFields[i]) && (curSeq[i, j]))
+                    while ((j < m - neededFields[i]) && (marked[i, j]))
                     {
                         ++seq;
                         ++j;
@@ -294,7 +281,7 @@ namespace Hexic
                     for (int l = seqStart; l < m - seq - neededFields[i]; ++l)
                     {
                         field[i, l] = field[i, l + seq];
-                        curSeq[i, l] = curSeq[i, l + seq];
+                        marked[i, l] = marked[i, l + seq];
                     }
                     neededFields[i] += seq;
                 }
