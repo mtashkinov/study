@@ -39,8 +39,9 @@ type Cloud(daylight : IDayLight, luminary : ILuminary, wind : IWind, magic : IMa
     member private x.InternalCreate() =
       if luminary.isShining then
           match daylight.dayLight with
-          | Morning -> if (wind.speed >= 3) && (wind.speed <= 5) then (Puppy, true)
-                                                                 else (Piglet, false)
+          | Morning -> let speed = wind.speed 
+                       if (speed >= 3) && (speed <= 5) then (Puppy, true)
+                                                       else (Piglet, false)
           | Noon -> if wind.speed = 0 then (Kitten, true)
                                       else (Piglet, false)
           | Afternoon -> if wind.speed = 0 then (Balloon, false)
