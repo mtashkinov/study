@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Intersect", "Intersect\Intersect.fsproj", "{BF0C81D7-5557-40B4-8C32-22B2831C5433}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Tests", "Tests\Tests.fsproj", "{4D7B9007-EAFE-45CE-BE29-46ADEA2FE9E9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BF0C81D7-5557-40B4-8C32-22B2831C5433} = {BF0C81D7-5557-40B4-8C32-22B2831C5433}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUI", "GUI\GUI.csproj", "{111312C9-8C4D-41EC-B458-0A2E6908C9A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BF0C81D7-5557-40B4-8C32-22B2831C5433} = {BF0C81D7-5557-40B4-8C32-22B2831C5433}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF0C81D7-5557-40B4-8C32-22B2831C5433}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF0C81D7-5557-40B4-8C32-22B2831C5433}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF0C81D7-5557-40B4-8C32-22B2831C5433}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF0C81D7-5557-40B4-8C32-22B2831C5433}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D7B9007-EAFE-45CE-BE29-46ADEA2FE9E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D7B9007-EAFE-45CE-BE29-46ADEA2FE9E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D7B9007-EAFE-45CE-BE29-46ADEA2FE9E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D7B9007-EAFE-45CE-BE29-46ADEA2FE9E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{111312C9-8C4D-41EC-B458-0A2E6908C9A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{111312C9-8C4D-41EC-B458-0A2E6908C9A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{111312C9-8C4D-41EC-B458-0A2E6908C9A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{111312C9-8C4D-41EC-B458-0A2E6908C9A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
