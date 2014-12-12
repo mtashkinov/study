@@ -1,0 +1,6 @@
+Intersect\bin\Debug\Intersect.exe
+Tests\bin\Debug\Intersect.exe
+Tests\bin\Debug\Tests.dll
+GUI\bin\Debug\Intersect.exe
+GUI\bin\Debug\GUI.exe
+
