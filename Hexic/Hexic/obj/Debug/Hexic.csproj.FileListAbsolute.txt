@@ -1,6 +1,6 @@
-C:\Users\Mikhail\Documents\GitHub\study\Hexic\Hexic\obj\Debug\Hexic.csprojResolveAssemblyReference.cache
-C:\Users\Mikhail\Documents\GitHub\study\Hexic\Hexic\bin\Debug\Hexic.exe.config
-C:\Users\Mikhail\Documents\GitHub\study\Hexic\Hexic\bin\Debug\Hexic.exe
-C:\Users\Mikhail\Documents\GitHub\study\Hexic\Hexic\bin\Debug\Hexic.pdb
-C:\Users\Mikhail\Documents\GitHub\study\Hexic\Hexic\obj\Debug\Hexic.exe
-C:\Users\Mikhail\Documents\GitHub\study\Hexic\Hexic\obj\Debug\Hexic.pdb
+C:\Users\Mikhail\Documents\Visual Studio 2013\Projects\Hexic\Hexic\bin\Debug\Hexic.exe.config
+C:\Users\Mikhail\documents\visual studio 2013\Projects\Hexic\Hexic\obj\Debug\Hexic.csprojResolveAssemblyReference.cache
+C:\Users\Mikhail\documents\visual studio 2013\Projects\Hexic\Hexic\bin\Debug\Hexic.exe
+C:\Users\Mikhail\documents\visual studio 2013\Projects\Hexic\Hexic\bin\Debug\Hexic.pdb
+C:\Users\Mikhail\documents\visual studio 2013\Projects\Hexic\Hexic\obj\Debug\Hexic.exe
+C:\Users\Mikhail\documents\visual studio 2013\Projects\Hexic\Hexic\obj\Debug\Hexic.pdb
