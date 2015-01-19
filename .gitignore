@@ -1,2 +1,6 @@
 *.pdb
 *.cache
+*.config
+*.dll
+*.nuspec
+*.nupkg
