@@ -13,11 +13,9 @@ puncts  = oneOf (map sym ".,:?;!'\"")
 
 data Token = W String | Eoln | Pu Char deriving Show
 
-ident :: Parser Token
-ident = do
-        x <- letter 
-        xs <- many (letter ||| digit)
-        return (W (x:xs))
+word = do
+        x <- some (letter ||| digit)
+        return (W x)
 
 ws = many wss
     
@@ -33,7 +31,7 @@ tokenizer = do
     ws
     many token where
         token = do
-            x <- oneOf [ident, punct, eoln]
+            x <- oneOf [word, punct, eoln]
             ws
             return x
             
