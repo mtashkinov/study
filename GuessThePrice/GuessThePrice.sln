@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessThePrice", "GuessThePrice\GuessThePrice.csproj", "{E8160ABC-4FD5-4F3B-9424-814F35B3A1E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C0E47CD7-E22E-4E00-8354-CA0EC78D602E}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PublishScripts", "PublishScripts", "{FBAF96E0-04D2-4F35-9B26-1FCD797B9B05}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\AzureWebsitePublishModule.psm1 = PublishScripts\AzureWebsitePublishModule.psm1
+		PublishScripts\Publish-WebApplicationWebsite.ps1 = PublishScripts\Publish-WebApplicationWebsite.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configurations", "Configurations", "{229C274A-1246-4113-A3A7-EF886B9AFADF}"
+	ProjectSection(SolutionItems) = preProject
+		PublishScripts\Configurations\GuessThePrice-WAWS-dev.json = PublishScripts\Configurations\GuessThePrice-WAWS-dev.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8160ABC-4FD5-4F3B-9424-814F35B3A1E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8160ABC-4FD5-4F3B-9424-814F35B3A1E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8160ABC-4FD5-4F3B-9424-814F35B3A1E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8160ABC-4FD5-4F3B-9424-814F35B3A1E3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{229C274A-1246-4113-A3A7-EF886B9AFADF} = {FBAF96E0-04D2-4F35-9B26-1FCD797B9B05}
+	EndGlobalSection
+EndGlobal
