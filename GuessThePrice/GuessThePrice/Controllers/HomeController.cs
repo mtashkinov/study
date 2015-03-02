@@ -48,5 +48,16 @@ namespace GuessThePrice.Controllers
 
             return table.ExecuteQuery(query).ToArray();
         }
+
+        public ActionResult Guess(Models.Picture picture, string guessedPrice)
+        {
+            Models.Picture[] pictures;
+            int index;
+            pictures = (Models.Picture[])Session["Pictures"];
+            index = (int)Session["Index"];
+            ViewBag.guessedPrice = guessedPrice;
+
+            return View(pictures[index]);
+        }
     }
 }
