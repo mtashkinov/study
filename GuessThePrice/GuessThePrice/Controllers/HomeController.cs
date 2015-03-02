@@ -15,10 +15,8 @@ namespace GuessThePrice.Controllers
     {
         public ActionResult Index()
         {
-            Models.Picture[] pictures;
-            int index;
-
-            pictures = (Models.Picture[])Session["Pictures"];
+            Models.Picture[] pictures = (Models.Picture[])Session["Pictures"];
+            int index = 0;
 
             if (pictures == null)
             {
@@ -51,13 +49,18 @@ namespace GuessThePrice.Controllers
 
         public ActionResult Guess(Models.Picture picture, string guessedPrice)
         {
-            Models.Picture[] pictures;
-            int index;
-            pictures = (Models.Picture[])Session["Pictures"];
-            index = (int)Session["Index"];
-            ViewBag.guessedPrice = guessedPrice;
+            Models.Picture[] pictures = (Models.Picture[])Session["Pictures"]; ;
+            int index = (int)Session["Index"];
+            long price = 0;
 
-            return View(pictures[index]);
+            ViewBag.guessedPrice = guessedPrice;
+            if (Int64.TryParse(guessedPrice, out price))
+            {
+                return View(pictures[index]);
+            } else
+            {
+                return View("Index", pictures[index]);
+            }
         }
     }
 }
