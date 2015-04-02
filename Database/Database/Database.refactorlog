@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="0cec84ee-bda6-4bc5-909b-596b23c46403" ChangeDateTime="03/16/2015 17:18:48">
+    <Property Name="ElementName" Value="[dbo].[Customer].[Adress]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Customer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Real Adress" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1d2959c7-6470-4684-9afb-2a4ee4434279" ChangeDateTime="03/16/2015 17:46:35">
+    <Property Name="ElementName" Value="[dbo].[Order].[Customer_ID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Order]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CustomerId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="40c9e2a8-047f-4e4f-80c0-d970fc72999a" ChangeDateTime="03/16/2015 18:05:12">
+    <Property Name="ElementName" Value="[dbo].[OrderedContainer].[PlombNumber]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[OrderedContainer]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StampNumber" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0a871d4a-59ca-443e-9a79-348bfb037912" ChangeDateTime="03/30/2015 11:03:43">
+    <Property Name="ElementName" Value="[dbo].[Ship].[Timetable]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Ship]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="HomePort" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="055f9c9b-5a9f-4935-b46f-d09f775310b8" ChangeDateTime="03/30/2015 11:04:26">
+    <Property Name="ElementName" Value="[dbo].[Ship].[HomePort]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Ship]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DeparturePort" />
+  </Operation>
+</Operations>
