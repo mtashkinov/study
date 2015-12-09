@@ -113,7 +113,7 @@ let rec private closureImpl (productions : Map<'Nonterminal, Symbol<'Nonterminal
         closureImpl productions items (List.rev pendingItems)
 
 /// Computes the LR(0) closure of a set of items.
-let closure (productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Terminal>[][]>) items =
+let closure (productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Terminal>[][]>) items : Items<_,_,_> =
     // Call the recursive implementation, starting with the specified initial item set.
     closureImpl productions Set.empty (Set.toList items)
 
@@ -141,13 +141,12 @@ let goto symbol items (productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Ter
 let final (item : Item<_,_,_>) : bool =
     item.CurrentSymbol = None
 
-let lhs (item : Item<_,_,_>) : 'Nonterminal =
-    item.Nonterminal
+let lhs (item : Item<_,_,_>) : Symbol<'Nonterminal, 'Terminal> =
+    Symbol.Nonterminal item.Nonterminal
 
 let pop (item : Item<_,_,_>) : Item<_,_,_> =
     { item with
-        Position = item.Position - 1<_>;
-        Lookahead = item.CurrentSymbol; }
+        Position = item.Position - 1<_>}
 
 let first (item : Item<_,_,_>) : bool =
     item.Position = 0<_>
@@ -165,10 +164,20 @@ let findFinalItems (items : Items<_,_,_>) position : MyParserState<_,_,_> =
     Set.iter (fun x -> if final x then finalItems <- finalItems.Add (x, position)) items
     finalItems
 
-let afterApplying (items : Items<_,_,_>) (symbol : Symbol<'Nonterminal, 'Terminal>) position : MyParserState<_,_,_> =
-    state
 
-let beforeApplying (items : Items<_,_,_>) position : MyParserState<_,_,_> =
+let rec afterApplying items (symbol : Symbol<'Nonterminal, 'Terminal>) position : MyParserState<_,_,_> =
+    let closure = closure productions items
+    let gotoItems = goto symbol items productions
+    let nextItems = beforeApplying gotoItems position
+    let mutable result : MyParserState<_,_,_> = Set.empty
+    let mutable recursionItems : MyParserState<_,_,_> = Set.empty
+    Set.iter (fun (a, b) -> 
+        let pop = pop a
+        if items.Contains pop then result <- result.Add (pop, b)
+        if closure.Contains pop then recursionItems <- recursionItems.Add (a, b)) nextItems
+    Set.iter (fun (a, b) -> result <- Set.union result (afterApplying items (lhs a) b)) recursionItems
+    result
+and beforeApplying (items : Items<_,_,_>) position : MyParserState<_,_,_> =
     let closure = closure productions items
     let mutable result : MyParserState<_,_,_> = Set.union (afterApplying items (Symbol.Terminal string.[position]) (position + 1)) (findFinalItems items position)
     let firstNonterminals = findNonterminalsFromStartItems closure
