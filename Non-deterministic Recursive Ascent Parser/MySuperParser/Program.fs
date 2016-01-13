@@ -75,7 +75,7 @@ let rec private closureImpl (productions : Map<'Nonterminal, Symbol<'Nonterminal
             ((items, []), pendingItems)
             ||> List.fold (fun (items, pendingItems) (item : Item<_,_,_>) ->
                 // Add the current item to the item set.
-                let items = Set.add item items
+                let items = Set.add item items                
 
                 // If the position is at the end of the production, or if the current symbol
                 // is a terminal, there's nothing that needs to be done for this item.
@@ -112,15 +112,15 @@ let rec private closureImpl (productions : Map<'Nonterminal, Symbol<'Nonterminal
         // easier to understand/trace.
         closureImpl productions items (List.rev pendingItems)
 
-/// Computes the LR(0) closure of a set of items.
+/// Computes the closure of a set of items.
 let closure (productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Terminal>[][]>) items : Items<_,_,_> =
     // Call the recursive implementation, starting with the specified initial item set.
-    closureImpl productions Set.empty (Set.toList items)
+    Set.difference (closureImpl productions Set.empty (Set.toList items)) items
 
 /// Moves the 'dot' (the current parser position) past the
 /// specified symbol for each item in a set of items.
-let goto symbol items (productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Terminal>[][]>) : Items<_,_,_> =
-    (Set.empty, items)
+let goto symbol items closure (productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Terminal>[][]>) : Items<_,_,_> =
+    (Set.empty, Set.union items closure)
     ||> Set.fold (fun updatedItems (item : Item<_,_,_>) ->
         // If the next symbol to be parsed in the production is the
         // specified symbol, create a new item with the position advanced
@@ -134,8 +134,6 @@ let goto symbol items (productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Ter
 
         | _ ->
             updatedItems)
-    // Return the closure of the item set.
-    |> closure productions
 
 
 let final (item : Item<_,_,_>) : bool =
@@ -148,15 +146,15 @@ let pop (item : Item<_,_,_>) : Item<_,_,_> =
     { item with
         Position = item.Position - 1<_>}
 
-let first (item : Item<_,_,_>) : bool =
-    item.Position = 0<_>
+let eps (item : Item<_,_,_>) : bool =
+    item.Position = 0<_> && item.CurrentSymbol = None
 
-let string : string = "aaaa"
-let productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Terminal>[][]> = Map.empty
+let string : string = "111000"
+let mutable productions : Map<'Nonterminal, Symbol<'Nonterminal, 'Terminal>[][]> = Map.empty
 
-let findNonterminalsFromStartItems (items : Items<_,_,_>) : Set<'Nonterminal> =
+let findEpsilonNonterminals (items : Items<_,_,_>) : Set<'Nonterminal> =
     let mutable nonterminals : Set<'Nonterminal> = Set.empty
-    Set.iter (fun x -> if first x then nonterminals <- nonterminals.Add x.Nonterminal) items
+    Set.iter (fun x -> if eps x then nonterminals <- nonterminals.Add x.Nonterminal) items
     nonterminals
 
 let findFinalItems (items : Items<_,_,_>) position : MyParserState<_,_,_> =
@@ -164,27 +162,40 @@ let findFinalItems (items : Items<_,_,_>) position : MyParserState<_,_,_> =
     Set.iter (fun x -> if final x then finalItems <- finalItems.Add (x, position)) items
     finalItems
 
-
-let rec afterApplying items (symbol : Symbol<'Nonterminal, 'Terminal>) position : MyParserState<_,_,_> =
-    let closure = closure productions items
-    let gotoItems = goto symbol items productions
-    let nextItems = beforeApplying gotoItems position
-    let mutable result : MyParserState<_,_,_> = Set.empty
-    let mutable recursionItems : MyParserState<_,_,_> = Set.empty
-    Set.iter (fun (a, b) -> 
-        let pop = pop a
-        if items.Contains pop then result <- result.Add (pop, b)
-        if closure.Contains pop then recursionItems <- recursionItems.Add (a, b)) nextItems
-    Set.iter (fun (a, b) -> result <- Set.union result (afterApplying items (lhs a) b)) recursionItems
-    result
+let rec afterApplying (items : Items<_,_,_>) (symbol : Symbol<'Nonterminal, 'Terminal>) position : MyParserState<_,_,_> =
+    if position >= String.length string || items.IsEmpty then Set.empty
+    else
+        let closure = closure productions items
+        let gotoItems = goto symbol items closure productions
+        let nextItems = beforeApplying gotoItems position
+        let mutable result : MyParserState<_,_,_> = Set.empty
+        let mutable recursionItems : MyParserState<_,_,_> = Set.empty
+        Set.iter (fun (a, b) -> 
+            let pop = pop a
+            if items.Contains pop then result <- result.Add (pop, b)
+            if closure.Contains pop then recursionItems <- recursionItems.Add (a, b)) nextItems
+        Set.iter (fun (a, b) -> result <- Set.union result (afterApplying items (lhs a) b)) recursionItems
+        result
 and beforeApplying (items : Items<_,_,_>) position : MyParserState<_,_,_> =
-    let closure = closure productions items
-    let mutable result : MyParserState<_,_,_> = Set.union (afterApplying items (Symbol.Terminal string.[position]) (position + 1)) (findFinalItems items position)
-    let firstNonterminals = findNonterminalsFromStartItems closure
-    Set.iter (fun x -> result <- Set.union result (afterApplying items (Symbol.Nonterminal x) position)) firstNonterminals
-    result
+    if position >= String.length string || items.IsEmpty then Set.empty
+    else
+        let closure = closure productions items
+        let mutable result : MyParserState<_,_,_> = Set.empty
+        if position < String.length string - 1 then
+            result <- afterApplying items (Symbol.Terminal string.[position + 1]) (position + 1)
+        result <- Set.union result (findFinalItems items position)
+        let firstNonterminals = findEpsilonNonterminals closure
+        Set.iter (fun x -> result <- Set.union result (afterApplying items (Symbol.Nonterminal x) position)) firstNonterminals
+        result
+                
 
-
-[<EntryPoint>]
-let main argv = 
-    0
+productions <- productions.Add ('S', [|[|Symbol.Terminal '1'; Symbol.Nonterminal 'S'; Symbol.Terminal '0'|]; [||]|])
+productions <- productions.Add ('A', [|[|Symbol.Nonterminal 'S'|]|])
+let startItem = {
+                    Nonterminal = 'A';
+                    Production = (productions.Item 'A').[0];
+                    Position = GenericZero;
+                    Lookahead = (); }
+let mutable items : Items<'Nonterminal, 'Terminal, 'Lookahead> = Set.empty
+items <- items.Add startItem
+printfn "%A" (beforeApplying items -1)
