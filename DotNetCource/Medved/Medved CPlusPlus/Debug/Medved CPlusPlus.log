@@ -1,0 +1,6 @@
+﻿  Main.cpp
+  Medved CPlusPlus.cpp
+  Generating Code...
+  AssemblyInfo.obj : /DEBUG:FASTLINK is not supported when managed code is present; restarting link with /DEBUG:FULL
+  Medved CPlusPlus.vcxproj -> C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\CA\Medved\Debug\Medved CPlusPlus.exe
+  Medved CPlusPlus.vcxproj -> C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\CA\Medved\Debug\Medved CPlusPlus.pdb (Partial PDB)

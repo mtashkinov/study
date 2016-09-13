@@ -1,0 +1,5 @@
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\CA\Medved\Medved CSharp\bin\Debug\Medved CSharp.dll
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\CA\Medved\Medved CSharp\bin\Debug\Medved CSharp.pdb
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\CA\Medved\Medved CSharp\obj\Debug\Medved CSharp.dll
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\CA\Medved\Medved CSharp\obj\Debug\Medved CSharp.pdb
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\CA\Medved\Medved CSharp\obj\Debug\Medved CSharp.csprojResolveAssemblyReference.cache
