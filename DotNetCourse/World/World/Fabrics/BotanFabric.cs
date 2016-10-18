@@ -19,11 +19,11 @@ namespace World.Fabrics
         {
             if (parent == null)
             {
-                throw new ArgumentException("Invalid parent");
+                throw new ArgumentNullException("null parent");
             }
             Sex randomSex = Randomizer.GetRandomSex();
 
-            return new Botan(Randomizer.GetRandomStudentAge(), NamesHelper.GenerateName(randomSex), randomSex, NamesHelper.PatronymicFromName(randomSex, parent.Name), Math.Log10(parent.Money));
+            return new Botan(Randomizer.GetRandomStudentAge(), NamesHelper.GenerateName(randomSex), randomSex, NamesHelper.PatronymicFromName(randomSex, parent.Name), MoneyHelper.MoneyToMark(parent.Money));
         }
 
         private double GetRandomAvgMark()

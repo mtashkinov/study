@@ -17,7 +17,7 @@ namespace AdvancedWorld.HasName
         {
             ConsoleColor foregroundColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("PrettyGirl {0} {1}", Name, Patronymic);
+            Console.WriteLine("SmartGirl {0} {1}", Name, Patronymic);
             Console.ForegroundColor = foregroundColor;
         }
     }

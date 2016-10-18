@@ -6,7 +6,7 @@ namespace World
     {
         internal Human(int age, string name, Sex sex)
         {
-            if ((age < 0) || (name == null) || (name.Equals("")))
+            if ((age < 0) || String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("Invalid human parameters");
             }

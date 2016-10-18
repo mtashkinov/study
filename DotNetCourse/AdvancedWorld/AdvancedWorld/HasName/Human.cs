@@ -6,7 +6,7 @@ namespace AdvancedWorld.HasName
     {
         internal Human(string name, Sex sex)
         {
-            if ((name == null) || (name.Equals("")))
+            if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("Invalid human name");
             }

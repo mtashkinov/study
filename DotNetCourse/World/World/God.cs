@@ -22,7 +22,7 @@ namespace World
         }
         public Human CreateHuman()
         {
-            switch (createdHumans.Count())
+            switch (createdHumans.Count)
             {
                 case 0:
                     return CreateHuman(Sex.Man);
@@ -35,7 +35,7 @@ namespace World
 
         public Human CreateHuman(Sex sex)
         {
-            Human newHuman =  fabrics[rnd.Next(fabrics.Count())].CreateHuman(sex);
+            Human newHuman =  fabrics[rnd.Next(fabrics.Count)].CreateHuman(sex);
             createdHumans.Add(newHuman);
             return newHuman;
         }
@@ -44,7 +44,7 @@ namespace World
         {
             if (human == null)
             {
-                throw new ArgumentException("Invalid human");
+                throw new ArgumentNullException("null human");
             }
             Human newHuman;
             if (human is Botan)
@@ -93,7 +93,7 @@ namespace World
 
         internal int GetTotalMoney()
         {
-            var size = createdHumans.Count();
+            var size = createdHumans.Count;
             var totalMoney = 0;
             for (int i = 0; i < size; ++i)
             {

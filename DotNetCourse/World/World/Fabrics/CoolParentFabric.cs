@@ -17,7 +17,7 @@ namespace World.Fabrics
         {
             if (student == null)
             {
-                throw new ArgumentException("Invalid student");
+                throw new ArgumentNullException("null student");
             }
             if (student.Patronymic.Length < 5)
             {
@@ -25,7 +25,7 @@ namespace World.Fabrics
             }
 
             var name = NamesHelper.NameFromPatronymic(student.Sex, student.Patronymic);
-            return new CoolParent(Randomizer.GetRandomParentAgeFromStudent(student.Age), name, Sex.Man, 1 + rnd.Next(maxChildsNum - 1), (Int32)Math.Pow(10.0, student.AverageMark)); // he surely has 1 child
+            return new CoolParent(Randomizer.GetRandomParentAgeFromStudent(student.Age), name, Sex.Man, 1 + rnd.Next(maxChildsNum - 1), MoneyHelper.MarkToMoney(student.AverageMark)); // he surely has 1 child
         }
     }
 }

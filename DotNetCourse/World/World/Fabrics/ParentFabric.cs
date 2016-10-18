@@ -16,7 +16,7 @@ namespace World.Fabrics
         {
             if (student == null)
             {
-                throw new ArgumentException("Invalid student");
+                throw new ArgumentNullException("null student");
             }
             if (student.Patronymic.Length < 5)
             {

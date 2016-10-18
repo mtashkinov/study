@@ -61,6 +61,15 @@ namespace World.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sunday is a holiday.
+        /// </summary>
+        public static string DoNotWorkOnSunday {
+            get {
+                return ResourceManager.GetString("DoNotWorkOnSunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How many humans do you want to create?.
         /// </summary>
         public static string HumansNum {
@@ -79,20 +88,11 @@ namespace World.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total money saved to.
+        ///   Looks up a localized string similar to Total money saved to {0} file.
         /// </summary>
         public static string MoneySaved {
             get {
                 return ResourceManager.GetString("MoneySaved", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sunday is a holiday.
-        /// </summary>
-        public static string Sunday {
-            get {
-                return ResourceManager.GetString("Sunday", resourceCulture);
             }
         }
         

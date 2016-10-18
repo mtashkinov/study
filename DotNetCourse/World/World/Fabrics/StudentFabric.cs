@@ -19,7 +19,7 @@ namespace World.Fabrics
         {
             if (parent == null)
             {
-                throw new ArgumentException("Invalid parent");
+                throw new ArgumentNullException("null parent");
             }
             Sex randomSex = Randomizer.GetRandomSex();
 

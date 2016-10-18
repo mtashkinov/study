@@ -5,11 +5,11 @@ namespace AdvancedWorld
 {
     internal sealed class Program
     {
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
             if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
             {
-                Console.WriteLine(Properties.Resources.Sunday);
+                Console.WriteLine(Properties.Resources.SundayHoliday);
                 return;
             }
             Console.WriteLine(Properties.Resources.Welcome);
@@ -18,11 +18,12 @@ namespace AdvancedWorld
             bool timeToExit = false;
             do
             {
-                ConsoleKeyInfo keyinfo = Console.ReadKey();
+                ConsoleKeyInfo keyinfo = Console.ReadKey(true);
                 switch (keyinfo.Key)
                 {
                     case ConsoleKey.Enter:
                         GenerateAndPrintCouple(god);
+                        Console.WriteLine();
                         break;
                     case ConsoleKey.Q:
                     case ConsoleKey.F10:
@@ -31,7 +32,6 @@ namespace AdvancedWorld
                     default:
                         break;
                 }
-                Console.WriteLine();
             } while (!timeToExit);
         }
 

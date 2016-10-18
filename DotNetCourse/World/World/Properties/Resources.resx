@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DoNotWorkOnSunday" xml:space="preserve">
+    <value>Sunday is a holiday</value>
+    <comment>Displayed when today is Sunday</comment>
+  </data>
   <data name="HumansNum" xml:space="preserve">
     <value>How many humans do you want to create?</value>
     <comment>Ask for number of humans to create</comment>
@@ -125,11 +129,7 @@
     <value>It isn't a valid humans number</value>
   </data>
   <data name="MoneySaved" xml:space="preserve">
-    <value>Total money saved to</value>
-  </data>
-  <data name="Sunday" xml:space="preserve">
-    <value>Sunday is a holiday</value>
-    <comment>Displayed when today is Sunday</comment>
+    <value>Total money saved to {0} file</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>This is God Console! Create your humans here.</value>

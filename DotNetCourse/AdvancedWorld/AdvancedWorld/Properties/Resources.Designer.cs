@@ -63,9 +63,9 @@ namespace AdvancedWorld.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Sunday is a holiday.
         /// </summary>
-        internal static string Sunday {
+        internal static string SundayHoliday {
             get {
-                return ResourceManager.GetString("Sunday", resourceCulture);
+                return ResourceManager.GetString("SundayHoliday", resourceCulture);
             }
         }
         

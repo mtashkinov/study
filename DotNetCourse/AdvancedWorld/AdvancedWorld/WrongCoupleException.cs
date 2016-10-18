@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdvancedWorld
 {
-    class WrongCoupleException : Exception
+    internal sealed class WrongCoupleException : Exception
     {
     }
 }

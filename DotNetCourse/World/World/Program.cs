@@ -7,12 +7,12 @@ namespace World
     internal sealed class Program
     {
         private const string outputFile = "output.txt";
-        static void Main()
+        public static void Main()
         {
             Console.WriteLine(Properties.Resources.Welcome);
             if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
             {
-                Console.WriteLine(Properties.Resources.Sunday);
+                Console.WriteLine(Properties.Resources.DoNotWorkOnSunday);
                 return;
             }
             var isInt = true;
@@ -41,7 +41,7 @@ namespace World
         {
             for (int i = 0; i < humansToCreate; ++i)
             {
-                var createdHuman = god.CreateHuman();
+                god.CreateHuman();
             }
             return god.GetCreatedHumans();
         }
@@ -58,7 +58,7 @@ namespace World
         private static void SaveTotalMoney(God god)
         {
             File.WriteAllText(outputFile, god.GetTotalMoney().ToString());
-            Console.WriteLine(Properties.Resources.MoneySaved +  " " + outputFile);
+            Console.WriteLine(String.Format(Properties.Resources.MoneySaved, outputFile));
         }
 
         private static Human[] GeneratePairs(God god, Human[] humans)

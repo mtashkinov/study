@@ -8,6 +8,11 @@ namespace World.Fabrics
 
         private static string[] manNames = new string[] { "Антон", "Борис", "Вадим", "Виктор", "Владимир", "Динар" };
         private static string[] womanNames = new string[] { "Анна", "Вера", "Даяна", "Инна", "Ирина", "Лара" };
+
+        private const string manPatronymicAddition = "ович";
+        private const string womanPatronymicAddition = "овна";
+        private const int patronymicAdditionLength = 4;
+
         internal static string GenerateName(Sex sex)
         {
             switch (sex)
@@ -17,7 +22,7 @@ namespace World.Fabrics
                 case Sex.Woman:
                     return (string)womanNames.GetValue(rnd.Next(womanNames.Length));
                 default:
-                    throw new ArgumentException("Invalid sex");
+                    throw new NotSupportedException("Invalid sex");
             }
             
         }
@@ -27,40 +32,45 @@ namespace World.Fabrics
             switch (sex)
             {
                 case Sex.Man:
-                    return GenerateName(Sex.Man) + "ович";
+                    return GenerateName(Sex.Man) + manPatronymicAddition;
                 case Sex.Woman:
-                    return GenerateName(Sex.Man) + "овна";
+                    return GenerateName(Sex.Man) + womanPatronymicAddition;
                 default:
-                    throw new ArgumentException("Invalid sex");
+                    throw new NotSupportedException("Invalid sex");
             }
         }
 
         internal static string PatronymicFromName(Sex sex, string name)
         {
-            if ((name == null) || (name.Length == 0))
+            if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("Invalid name");
             }
             switch (sex)
             {
                 case Sex.Man:
-                    return name + "ович";
+                    return name + manPatronymicAddition;
                 case Sex.Woman:
-                    return name + "овна";
+                    return name + womanPatronymicAddition;
                 default:
-                    return "";
+                    throw new NotSupportedException("Invalid sex");
             }
         }
 
         internal static string NameFromPatronymic(Sex sex, string patronymic)
         {
-            string partToDel = patronymic.Substring(patronymic.Length - 4, 4);
+            if ((patronymic == null) || (patronymic.Length <= 4))
+            {
+                throw new ArgumentException("Invalid patronymic");
+            }
+
+            string partToDel = patronymic.Substring(patronymic.Length - patronymicAdditionLength, patronymicAdditionLength);
 
             switch (sex)
             {
                 case Sex.Man:
                     {
-                        if (!partToDel.Equals("ович"))
+                        if (!partToDel.Equals(manPatronymicAddition))
                         {
                             throw new ArgumentException("Invalid patronymic name");
                         }
@@ -68,15 +78,18 @@ namespace World.Fabrics
                     }
                 case Sex.Woman:
                     {
-                        if (!partToDel.Equals("овна"))
+                        if (!partToDel.Equals(womanPatronymicAddition))
                         {
                             throw new ArgumentException("Invalid patronymic name");
                         }
                         break;
                     }
+                default:
+                    throw new NotSupportedException("Invalid sex");
+
             }
 
-            return patronymic.Substring(0, patronymic.Length - 4);
+            return patronymic.Substring(0, patronymic.Length - patronymicAdditionLength);
         }
     }
 }

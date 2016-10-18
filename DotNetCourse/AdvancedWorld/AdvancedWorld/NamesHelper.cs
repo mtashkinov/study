@@ -9,6 +9,11 @@ namespace AdvancedWorld
 
         private static string[] manNames = new string[] { "Антон", "Борис", "Вадим", "Виктор", "Владимир", "Динар" };
         private static string[] womanNames = new string[] { "Анна", "Вера", "Даяна", "Инна", "Ирина", "Лара" };
+
+        private const string manPatronymicAddition = "ович";
+        private const string womanPatronymicAddition = "овна";
+        private const int patronymicAdditionLength = 4;
+
         internal static string GenerateName(Sex sex)
         {
             switch (sex)
@@ -18,38 +23,25 @@ namespace AdvancedWorld
                 case Sex.Woman:
                     return (string)womanNames.GetValue(rnd.Next(womanNames.Length));
                 default:
-                    throw new ArgumentException("Invalid sex");
+                    throw new NotSupportedException("Invalid sex");
             }
-            
-        }
 
-        internal static string GeneratePatronymic(Sex sex)
-        {
-            switch (sex)
-            {
-                case Sex.Man:
-                    return GenerateName(Sex.Man) + "ович";
-                case Sex.Woman:
-                    return GenerateName(Sex.Man) + "овна";
-                default:
-                    throw new ArgumentException("Invalid sex");
-            }
         }
 
         internal static string PatronymicFromName(Sex sex, string name)
         {
-            if ((name == null) || (name.Length == 0))
+            if (String.IsNullOrEmpty(name))
             {
                 throw new ArgumentException("Invalid name");
             }
             switch (sex)
             {
                 case Sex.Man:
-                    return name + "ович";
+                    return name + manPatronymicAddition;
                 case Sex.Woman:
-                    return name + "овна";
+                    return name + womanPatronymicAddition;
                 default:
-                    return "";
+                    throw new NotSupportedException("Invalid sex");
             }
         }
     }

@@ -5,7 +5,7 @@ namespace World
     {
         internal Student(int age, string name, Sex sex, string patronymic) : base(age, name, sex)
         {
-            if ((patronymic == null) || (patronymic.Equals("")))
+            if (String.IsNullOrEmpty(patronymic))
             {
                 throw new ArgumentException("Invalid patronymic");
             }

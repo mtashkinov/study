@@ -12,6 +12,8 @@ namespace AdvancedWorld
 {
     internal sealed class God : IGod
     {
+        private const string hasNameNamespace = "AdvancedWorld.HasName.";
+
         private bool checkForLike = true;
         private Random rnd = new Random();
         private List<IHumanFabric> fabrics = new List<IHumanFabric>();
@@ -32,7 +34,7 @@ namespace AdvancedWorld
 
         public Human CreateHuman()
         {
-            return fabrics[rnd.Next(fabrics.Count())].CreateHuman();
+            return fabrics[rnd.Next(fabrics.Count)].CreateHuman();
         }
 
         public IHasName MakeCouple(Human human1, Human human2)
@@ -41,16 +43,16 @@ namespace AdvancedWorld
             {
                 throw new WrongCoupleException();
             }
-            Type human1Type = DetermineHumanType(human1);
-            Type human2Type = DetermineHumanType(human2);
+            Type human1Type = human1.GetType();
+            Type human2Type = human2.GetType();
             CoupleAttribute attr1 = GetCorrectAttribute(human1Type, human2Type);
-            if (isLike(attr1.Probability))
+            if (IsLike(attr1.Probability))
             {
                 CoupleAttribute attr2 = GetCorrectAttribute(human2Type, human1Type);
-                if (isLike(attr2.Probability))
+                if (IsLike(attr2.Probability))
                 {
-                    Human father = GetFather(human1, human2);
-                    Human mother = GetMother(human1, human2);
+                    Human father = SelectFather(human1, human2);
+                    Human mother = SelectMother(human1, human2);
                     return CreateCoupleResult(attr1.ChildType, mother.Name, father.Name);
                 }
             }
@@ -58,19 +60,19 @@ namespace AdvancedWorld
             return null;
         }
 
-        private Human GetFather(Human human1, Human human2)
+        private Human SelectFather(Human human1, Human human2)
         {
             return human1.Sex == Sex.Man ? human1 : human2;
         }
 
-        private Human GetMother(Human human1, Human human2)
+        private Human SelectMother(Human human1, Human human2)
         {
             return human1.Sex == Sex.Woman ? human1 : human2;
         }
 
         private IHasName CreateCoupleResult(string typeName, string humanName, string fatherName)
         {
-            Type type = Type.GetType("AdvancedWorld.HasName." + typeName);
+            Type type = Type.GetType(hasNameNamespace + typeName);
             IHasName hasName = (IHasName)Activator.CreateInstance(type, new object[1] { humanName });
 
             PropertyInfo info = type.GetProperty("Patronymic");
@@ -119,7 +121,7 @@ namespace AdvancedWorld
             throw new ArgumentException("Type without correct attribute");
         }
 
-        private bool isLike(double probability)
+        private bool IsLike(double probability)
         {
             if (checkForLike)
             {
@@ -129,27 +131,6 @@ namespace AdvancedWorld
             {
                 return true;
             }
-        }
-
-        private Type DetermineHumanType(Human human)
-        {
-            if (human is Botan)
-            {
-                return typeof(Botan);
-            } else if (human is Student)
-            {
-                return typeof(Student);
-            } else if (human is SmartGirl)
-            {
-                return typeof(SmartGirl);
-            } else if (human is PrettyGirl)
-            {
-                return typeof(PrettyGirl);
-            } else if (human is Girl)
-            {
-                return typeof(Girl);
-            }
-            else throw new ArgumentException("Wrong human type");
         }
     }
 }
