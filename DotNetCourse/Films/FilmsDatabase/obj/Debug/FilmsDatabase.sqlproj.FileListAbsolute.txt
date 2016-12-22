@@ -1,0 +1,5 @@
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\FilmsDatabase\bin\Debug\FilmsDatabase.dacpac
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\FilmsDatabase\bin\Debug\FilmsDatabase.dll
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\FilmsDatabase\bin\Debug\FilmsDatabase.pdb
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\FilmsDatabase\obj\Debug\FilmsDatabase.dll
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\FilmsDatabase\obj\Debug\FilmsDatabase.pdb

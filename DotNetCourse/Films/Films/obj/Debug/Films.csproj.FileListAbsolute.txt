@@ -1,0 +1,12 @@
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\bin\Debug\Films.exe.config
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\bin\Debug\Films.exe
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\bin\Debug\Films.pdb
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.csprojResolveAssemblyReference.cache
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.Properties.Resources.resources
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.csproj.GenerateResource.Cache
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.exe
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.pdb
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.Views.AboutForm.resources
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.Views.MainForm.resources
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.Views.SearchForm.resources
+C:\Users\Mikhail\Documents\Visual Studio 2015\Projects\Films\Films\obj\Debug\Films.Views.EditForm.resources
