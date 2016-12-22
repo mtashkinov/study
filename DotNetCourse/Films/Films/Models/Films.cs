@@ -61,7 +61,6 @@ namespace Films.Models
 
         public void Search(Dictionary<String, String> searchData)
         {
-            Thread.Sleep(5000);
             const String and = " and ";
             StringBuilder stringBuilder = new StringBuilder();
             foreach (KeyValuePair<String, String> pair in searchData)
