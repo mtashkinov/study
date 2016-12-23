@@ -22,10 +22,10 @@ namespace Films.Controllers
         {
             this.filmsView = filmsView;
             films = new Models.Films(this);
-            filmsView.DeleteStarted += FilmsViewInformer_DeleteStarted;
-            filmsView.LoadStarted += FilmsViewInformer_LoadStarted;
-            filmsView.SearchRequested += FilmsViewInformer_SearchRequested;
-            filmsView.EditRequested += FilmsView_EditRequested;
+            filmsView.DeleteStarted += OnFilmsViewInformerDeleteStarted;
+            filmsView.LoadStarted += OnFilmsViewInformerLoadStarted;
+            filmsView.SearchRequested += OnFilmsViewInformerSearchRequested;
+            filmsView.EditRequested += OnFilmsViewEditRequested;
             filmsView.DisableMenu();
             Task.Run(() => films.LoadData());
         }
@@ -55,46 +55,46 @@ namespace Films.Controllers
             filmsView.EnableMenu();
         }
 
-        private void FilmsViewInformer_LoadStarted(object sender, EventArgs e)
+        private void OnFilmsViewInformerLoadStarted(object sender, EventArgs e)
         {
             filmsView.DisableMenu();
             Task.Run(() => films.LoadData());
         }
 
-        private void FilmsViewInformer_DeleteStarted(object sender, String[] filmsNamesToDelete)
+        private void OnFilmsViewInformerDeleteStarted(object sender, String[] filmsNamesToDelete)
         {
             filmsView.DisableMenu();
             Task.Run(() => films.DeleteFilms(filmsNamesToDelete));
         }
 
-        private void FilmsViewInformer_SearchRequested(object sender, FormLocationInfo info)
+        private void OnFilmsViewInformerSearchRequested(object sender, FormLocationInfo info)
         {
             SearchForm form = new SearchForm();
             if (ShowForm(form, info))
             {
                 searchView = form;
-                searchView.SearchStarted += SearchView_SearchStarted;
+                searchView.SearchStarted += OnSearchViewSearchStarted;
             }
         }
 
-        private void SearchView_SearchStarted(object sender, Dictionary<string, string> searchData)
+        private void OnSearchViewSearchStarted(object sender, Dictionary<string, string> searchData)
         {
             filmsView.DisableMenu();
             Task.Run(() => films.Search(searchData));
         }
 
-        private void FilmsView_EditRequested(object sender, FormLocationWithFilmInfo info)
+        private void OnFilmsViewEditRequested(object sender, FormLocationWithFilmInfo info)
         {
             EditForm form = new EditForm();
             if (ShowForm(form, info.Location))
             {
                 editView = form;
                 editView.SetFilmInfo(info.FilmName, info.FilmCountry, info.FilmYear);
-                editView.EditStarted += EditView_EditStarted;
+                editView.EditStarted += OnEditViewEditStarted;
             }
         }
 
-        private void EditView_EditStarted(object sender, Dictionary<string, string> editInfo)
+        private void OnEditViewEditStarted(object sender, Dictionary<string, string> editInfo)
         {
             filmsView.DisableMenu();
             Task.Run(() => films.UpdateFilm(editInfo));

@@ -109,8 +109,8 @@
             this.searchNameTextBox.Name = "searchNameTextBox";
             this.searchNameTextBox.Size = new System.Drawing.Size(187, 20);
             this.searchNameTextBox.TabIndex = 5;
-            this.searchNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.searchNameTextBox_Validating);
-            this.searchNameTextBox.Validated += new System.EventHandler(this.searchNameTextBox_Validated);
+            this.searchNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.OnSearchNameTextBoxValidating);
+            this.searchNameTextBox.Validated += new System.EventHandler(this.OnSearchNameTextBoxValidated);
             // 
             // searchCountryTextBox
             // 
@@ -121,8 +121,8 @@
             this.searchCountryTextBox.Name = "searchCountryTextBox";
             this.searchCountryTextBox.Size = new System.Drawing.Size(187, 20);
             this.searchCountryTextBox.TabIndex = 6;
-            this.searchCountryTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.searchCountryTextBox_Validating);
-            this.searchCountryTextBox.Validated += new System.EventHandler(this.searchCountryTextBox_Validated);
+            this.searchCountryTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.OnSearchCountryTextBoxValidating);
+            this.searchCountryTextBox.Validated += new System.EventHandler(this.OnSearchCountryTextBoxValidated);
             // 
             // searchYearTextBox
             // 
@@ -133,8 +133,8 @@
             this.searchYearTextBox.Name = "searchYearTextBox";
             this.searchYearTextBox.Size = new System.Drawing.Size(187, 20);
             this.searchYearTextBox.TabIndex = 7;
-            this.searchYearTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.searchYearTextBox_Validating);
-            this.searchYearTextBox.Validated += new System.EventHandler(this.searchYearTextBox_Validated);
+            this.searchYearTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.OnSearchYearTextBoxValidating);
+            this.searchYearTextBox.Validated += new System.EventHandler(this.OnSearchYearTextBoxValidated);
             // 
             // searchDirectorTextBox
             // 
@@ -145,8 +145,8 @@
             this.searchDirectorTextBox.Name = "searchDirectorTextBox";
             this.searchDirectorTextBox.Size = new System.Drawing.Size(187, 20);
             this.searchDirectorTextBox.TabIndex = 8;
-            this.searchDirectorTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.searchDirectorTextBox_Validating);
-            this.searchDirectorTextBox.Validated += new System.EventHandler(this.searchDirectorTextBox_Validated);
+            this.searchDirectorTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.OnSearchDirectorTextBoxValidating);
+            this.searchDirectorTextBox.Validated += new System.EventHandler(this.OnSearchDirectorTextBoxValidated);
             // 
             // searchActorTextBox
             // 
@@ -157,8 +157,8 @@
             this.searchActorTextBox.Name = "searchActorTextBox";
             this.searchActorTextBox.Size = new System.Drawing.Size(187, 20);
             this.searchActorTextBox.TabIndex = 9;
-            this.searchActorTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.searchActorTextBox_Validating);
-            this.searchActorTextBox.Validated += new System.EventHandler(this.searchActorTextBox_Validated);
+            this.searchActorTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.OnSearchActorTextBoxValidating);
+            this.searchActorTextBox.Validated += new System.EventHandler(this.OnSearchActorTextBoxValidated);
             // 
             // searchButton
             // 
@@ -168,7 +168,7 @@
             this.searchButton.TabIndex = 10;
             this.searchButton.Text = "Search";
             this.searchButton.UseVisualStyleBackColor = true;
-            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            this.searchButton.Click += new System.EventHandler(this.OnSearchButtonClicked);
             // 
             // errorProvider
             // 
@@ -182,7 +182,7 @@
             this.button2.TabIndex = 11;
             this.button2.Text = "Clear";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.clearButton_Click);
+            this.button2.Click += new System.EventHandler(this.OnClearButtonClicked);
             // 
             // SearchForm
             // 

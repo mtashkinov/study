@@ -75,8 +75,8 @@
             this.editNameTextBox.Name = "editNameTextBox";
             this.editNameTextBox.Size = new System.Drawing.Size(160, 20);
             this.editNameTextBox.TabIndex = 3;
-            this.editNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.editNameTextBox_Validating);
-            this.editNameTextBox.Validated += new System.EventHandler(this.editNameTextBox_Validated);
+            this.editNameTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.OnEditNameTextBoxValidating);
+            this.editNameTextBox.Validated += new System.EventHandler(this.OnEditNameTextBoxValidated);
             // 
             // editCountryTextBox
             // 
@@ -86,8 +86,8 @@
             this.editCountryTextBox.Name = "editCountryTextBox";
             this.editCountryTextBox.Size = new System.Drawing.Size(160, 20);
             this.editCountryTextBox.TabIndex = 4;
-            this.editCountryTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.editCountryTextBox_Validating);
-            this.editCountryTextBox.Validated += new System.EventHandler(this.editCountryTextBox_Validated);
+            this.editCountryTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.OnEditCountryTextBoxValidating);
+            this.editCountryTextBox.Validated += new System.EventHandler(this.OnEditCountryTextBoxValidated);
             // 
             // editYearTextBox
             // 
@@ -97,8 +97,8 @@
             this.editYearTextBox.Name = "editYearTextBox";
             this.editYearTextBox.Size = new System.Drawing.Size(160, 20);
             this.editYearTextBox.TabIndex = 5;
-            this.editYearTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.editYearTextBox_Validating);
-            this.editYearTextBox.Validated += new System.EventHandler(this.editYearTextBox_Validated);
+            this.editYearTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.OnEditYearTextBoxValidating);
+            this.editYearTextBox.Validated += new System.EventHandler(this.OnEditYearTextBoxValidated);
             // 
             // errorProvider
             // 
@@ -112,7 +112,7 @@
             this.saveButton.TabIndex = 6;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.saveButton.Click += new System.EventHandler(this.OnSaveButtonClicked);
             // 
             // EditForm
             // 

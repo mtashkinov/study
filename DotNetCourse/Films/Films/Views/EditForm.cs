@@ -29,7 +29,12 @@ namespace Films.Views
             editYearTextBox.Text = year;
         }
 
-        private void editNameTextBox_Validating(object sender, CancelEventArgs e)
+        public new void Close()
+        {
+            AsyncHelper.InvokeIfRequired(() => (this as Form).Close(), this as Form);
+        }
+
+        private void OnEditNameTextBoxValidating(object sender, CancelEventArgs e)
         {
             String errorMsg;
             if (!Validator.IsNameValid(editNameTextBox.Text, out errorMsg))
@@ -41,17 +46,12 @@ namespace Films.Views
             }
         }
 
-        public new void Close()
-        {
-            AsyncHelper.InvokeIfRequired(() => (this as Form).Close(), this as Form);
-        }
-
-        private void editNameTextBox_Validated(object sender, EventArgs e)
+        private void OnEditNameTextBoxValidated(object sender, EventArgs e)
         {
             errorProvider.SetError(editNameTextBox, "");
         }
 
-        private void editCountryTextBox_Validating(object sender, CancelEventArgs e)
+        private void OnEditCountryTextBoxValidating(object sender, CancelEventArgs e)
         {
             String errorMsg;
             if (!Validator.IsCountryValid(editCountryTextBox.Text, out errorMsg))
@@ -63,12 +63,12 @@ namespace Films.Views
             }
         }
 
-        private void editCountryTextBox_Validated(object sender, EventArgs e)
+        private void OnEditCountryTextBoxValidated(object sender, EventArgs e)
         {
             errorProvider.SetError(editCountryTextBox, "");
         }
 
-        private void editYearTextBox_Validating(object sender, CancelEventArgs e)
+        private void OnEditYearTextBoxValidating(object sender, CancelEventArgs e)
         {
             String errorMsg;
             if (!Validator.IsYearValid(editYearTextBox.Text, out errorMsg))
@@ -80,12 +80,12 @@ namespace Films.Views
             }
         }
 
-        private void editYearTextBox_Validated(object sender, EventArgs e)
+        private void OnEditYearTextBoxValidated(object sender, EventArgs e)
         {
             errorProvider.SetError(editYearTextBox, "");
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void OnSaveButtonClicked(object sender, EventArgs e)
         {
             Dictionary<String, String> editData = new Dictionary<String, String>();
             editData.Add(ColumnsNameHelper.SourceName, sourceFilmName);

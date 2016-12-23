@@ -95,7 +95,7 @@ namespace Films.Views
         }
 
 
-        private void deleteFilmToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnDeleteFilmToolStripMenuItemClicked(object sender, EventArgs e)
         {
             ArrayList names = new ArrayList();
             foreach (DataGridViewRow row in filmsGridView.SelectedRows)
@@ -113,7 +113,7 @@ namespace Films.Views
             DeleteStarted(this, names.ToArray(typeof(String)) as String[]);
         }
 
-        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnAboutToolStripMenuItemClicked(object sender, EventArgs e)
         {
             using (AboutForm form = new AboutForm())
             {
@@ -121,7 +121,7 @@ namespace Films.Views
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnExitToolStripMenuItemClicked(object sender, EventArgs e)
         {
             DialogResult confirmResult = MessageBox.Show(Properties.Resources.ConfirmExitText,
                                      Properties.Resources.ConfirmExitTitle,
@@ -132,17 +132,17 @@ namespace Films.Views
             }
         }
 
-        private void openDatabaseToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnOpenDatabaseToolStripMenuItemClicked(object sender, EventArgs e)
         {
             LoadStarted(this, EventArgs.Empty);
         }
 
-        private void findFilmToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnFindFilmToolStripMenuItemClicked(object sender, EventArgs e)
         {
             SearchRequested(this, new FormLocationInfo(Location, Width, Height));
         }
 
-        private void editFilmToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OnEditFilmToolStripMenuItemClicked(object sender, EventArgs e)
         {
             if (filmsGridView.SelectedRows.Count != 1)
             {

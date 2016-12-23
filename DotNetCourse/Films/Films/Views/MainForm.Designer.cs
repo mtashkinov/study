@@ -81,14 +81,14 @@
             this.openDatabaseToolStripMenuItem.Name = "openDatabaseToolStripMenuItem";
             this.openDatabaseToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.openDatabaseToolStripMenuItem.Text = "Open database";
-            this.openDatabaseToolStripMenuItem.Click += new System.EventHandler(this.openDatabaseToolStripMenuItem_Click);
+            this.openDatabaseToolStripMenuItem.Click += new System.EventHandler(this.OnOpenDatabaseToolStripMenuItemClicked);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.OnExitToolStripMenuItemClicked);
             // 
             // editToolStripMenuItem
             // 
@@ -105,21 +105,21 @@
             this.editFilmToolStripMenuItem.Name = "editFilmToolStripMenuItem";
             this.editFilmToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.editFilmToolStripMenuItem.Text = "Edit film";
-            this.editFilmToolStripMenuItem.Click += new System.EventHandler(this.editFilmToolStripMenuItem_Click);
+            this.editFilmToolStripMenuItem.Click += new System.EventHandler(this.OnEditFilmToolStripMenuItemClicked);
             // 
             // deleteFilmToolStripMenuItem
             // 
             this.deleteFilmToolStripMenuItem.Name = "deleteFilmToolStripMenuItem";
             this.deleteFilmToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.deleteFilmToolStripMenuItem.Text = "Delete films";
-            this.deleteFilmToolStripMenuItem.Click += new System.EventHandler(this.deleteFilmToolStripMenuItem_Click);
+            this.deleteFilmToolStripMenuItem.Click += new System.EventHandler(this.OnDeleteFilmToolStripMenuItemClicked);
             // 
             // findFilmToolStripMenuItem
             // 
             this.findFilmToolStripMenuItem.Name = "findFilmToolStripMenuItem";
             this.findFilmToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.findFilmToolStripMenuItem.Text = "Find films";
-            this.findFilmToolStripMenuItem.Click += new System.EventHandler(this.findFilmToolStripMenuItem_Click);
+            this.findFilmToolStripMenuItem.Click += new System.EventHandler(this.OnFindFilmToolStripMenuItemClicked);
             // 
             // helpToolStripMenuItem
             // 
@@ -134,7 +134,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.OnAboutToolStripMenuItemClicked);
             // 
             // MainForm
             // 

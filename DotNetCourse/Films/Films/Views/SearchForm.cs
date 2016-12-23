@@ -21,7 +21,7 @@ namespace Films.Views
             InitializeComponent();
         }
 
-        private void searchNameTextBox_Validating(object sender, CancelEventArgs e)
+        private void OnSearchNameTextBoxValidating(object sender, CancelEventArgs e)
         {
             String errorMsg;
             if (!Validator.IsNameValidForSearch(searchNameTextBox.Text, out errorMsg))
@@ -33,7 +33,7 @@ namespace Films.Views
             }
         }
 
-        private void searchCountryTextBox_Validating(object sender, CancelEventArgs e)
+        private void OnSearchCountryTextBoxValidating(object sender, CancelEventArgs e)
         {
             String errorMsg;
             if (!Validator.IsCountryValidForSearch(searchCountryTextBox.Text, out errorMsg))
@@ -45,7 +45,7 @@ namespace Films.Views
             }
         }
 
-        private void searchYearTextBox_Validating(object sender, CancelEventArgs e)
+        private void OnSearchYearTextBoxValidating(object sender, CancelEventArgs e)
         {
             String errorMsg;
             if (!Validator.IsYearValidForSearch(searchYearTextBox.Text, out errorMsg))
@@ -57,7 +57,7 @@ namespace Films.Views
             }
         }
 
-        private void searchDirectorTextBox_Validating(object sender, CancelEventArgs e)
+        private void OnSearchDirectorTextBoxValidating(object sender, CancelEventArgs e)
         {
             String errorMsg;
             if (!Validator.IsHumanValidForSearch(searchDirectorTextBox.Text, out errorMsg))
@@ -69,7 +69,7 @@ namespace Films.Views
             }
         }
 
-        private void searchActorTextBox_Validating(object sender, CancelEventArgs e)
+        private void OnSearchActorTextBoxValidating(object sender, CancelEventArgs e)
         {
             String errorMsg;
             if (!Validator.IsHumanValidForSearch(searchActorTextBox.Text, out errorMsg))
@@ -81,32 +81,32 @@ namespace Films.Views
             }
         }
 
-        private void searchNameTextBox_Validated(object sender, EventArgs e)
+        private void OnSearchNameTextBoxValidated(object sender, EventArgs e)
         {
             errorProvider.SetError(searchNameTextBox, "");
         }
 
-        private void searchCountryTextBox_Validated(object sender, EventArgs e)
+        private void OnSearchCountryTextBoxValidated(object sender, EventArgs e)
         {
             errorProvider.SetError(searchCountryTextBox, "");
         }
 
-        private void searchYearTextBox_Validated(object sender, EventArgs e)
+        private void OnSearchYearTextBoxValidated(object sender, EventArgs e)
         {
             errorProvider.SetError(searchYearTextBox, "");
         }
 
-        private void searchDirectorTextBox_Validated(object sender, EventArgs e)
+        private void OnSearchDirectorTextBoxValidated(object sender, EventArgs e)
         {
             errorProvider.SetError(searchDirectorTextBox, "");
         }
 
-        private void searchActorTextBox_Validated(object sender, EventArgs e)
+        private void OnSearchActorTextBoxValidated(object sender, EventArgs e)
         {
             errorProvider.SetError(searchActorTextBox, "");
         }
 
-        private void clearButton_Click(object sender, EventArgs e)
+        private void OnClearButtonClicked(object sender, EventArgs e)
         {
             searchNameTextBox.Clear();
             searchCountryTextBox.Clear();
@@ -115,7 +115,7 @@ namespace Films.Views
             searchActorTextBox.Clear();
         }
 
-        private void searchButton_Click(object sender, EventArgs e)
+        private void OnSearchButtonClicked(object sender, EventArgs e)
         {
             Dictionary<String, String> searchData = new Dictionary<String, String>();
             if (searchNameTextBox.Text.Length != 0)
