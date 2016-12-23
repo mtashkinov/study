@@ -100,7 +100,7 @@ namespace Films.Views
             ArrayList names = new ArrayList();
             foreach (DataGridViewRow row in filmsGridView.SelectedRows)
             {
-                names.Add(row.Cells["Name"].Value);
+                names.Add(row.Cells[ColumnsNameHelper.Name].Value);
                 DialogResult confirmResult =  MessageBox.Show(String.Format("{0} {1}?", Properties.Resources.ConfirmDeleteText, names[names.Count - 1]),
                                      Properties.Resources.ConfirmDeleteTitle,
                                      MessageBoxButtons.YesNo);
@@ -149,8 +149,8 @@ namespace Films.Views
                 return;
             }
             DataGridViewRow row = filmsGridView.SelectedRows[0];
-            EditRequested(this, new FormLocationWithFilmInfo(new FormLocationInfo(Location, Width, Height), row.Cells["Name"].Value as String,
-                row.Cells["Country"].Value as String, row.Cells["Year"].Value as String));
+            EditRequested(this, new FormLocationWithFilmInfo(new FormLocationInfo(Location, Width, Height), row.Cells[ColumnsNameHelper.Name].Value as String,
+                row.Cells[ColumnsNameHelper.Country].Value as String, row.Cells[ColumnsNameHelper.Year].Value as String));
         }
     }
 }

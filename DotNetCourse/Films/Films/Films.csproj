@@ -50,6 +50,7 @@
     <Compile Include="Controllers\FormLocationInfo.cs" />
     <Compile Include="Controllers\FormLocationWithFilmInfo.cs" />
     <Compile Include="Helpers\AsyncHelper.cs" />
+    <Compile Include="Helpers\ColumnsNameHelper.cs" />
     <Compile Include="Views\EditForm.cs">
       <SubType>Form</SubType>
     </Compile>

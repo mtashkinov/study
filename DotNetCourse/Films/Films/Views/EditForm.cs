@@ -88,10 +88,10 @@ namespace Films.Views
         private void saveButton_Click(object sender, EventArgs e)
         {
             Dictionary<String, String> editData = new Dictionary<String, String>();
-            editData.Add("SourceName", sourceFilmName);
-            editData.Add("Name", editNameTextBox.Text);
-            editData.Add("Country", editCountryTextBox.Text);
-            editData.Add("Year", editYearTextBox.Text);
+            editData.Add(ColumnsNameHelper.SourceName, sourceFilmName);
+            editData.Add(ColumnsNameHelper.Name, editNameTextBox.Text);
+            editData.Add(ColumnsNameHelper.Country, editCountryTextBox.Text);
+            editData.Add(ColumnsNameHelper.Year, editYearTextBox.Text);
 
             EditStarted(this, editData);
         }

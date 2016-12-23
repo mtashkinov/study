@@ -1,4 +1,5 @@
 ﻿using Films.Controllers;
+using Films.Helpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -119,27 +120,27 @@ namespace Films.Views
             Dictionary<String, String> searchData = new Dictionary<String, String>();
             if (searchNameTextBox.Text.Length != 0)
             {
-                searchData.Add("Name", searchNameTextBox.Text);
+                searchData.Add(ColumnsNameHelper.Name, searchNameTextBox.Text);
             }
 
             if (searchCountryTextBox.Text.Length != 0)
             {
-                searchData.Add("Country", searchCountryTextBox.Text);
+                searchData.Add(ColumnsNameHelper.Country, searchCountryTextBox.Text);
             }
 
             if (searchYearTextBox.Text.Length != 0)
             {
-                searchData.Add("Year", searchYearTextBox.Text);
+                searchData.Add(ColumnsNameHelper.Year, searchYearTextBox.Text);
             }
 
             if (searchDirectorTextBox.Text.Length != 0)
             {
-                searchData.Add("Director", searchDirectorTextBox.Text);
+                searchData.Add(ColumnsNameHelper.Director, searchDirectorTextBox.Text);
             }
 
             if (searchActorTextBox.Text.Length != 0)
             {
-                searchData.Add("Actor", searchActorTextBox.Text);
+                searchData.Add(ColumnsNameHelper.Actor, searchActorTextBox.Text);
             }
 
             if (searchData.Keys.Count > 0)

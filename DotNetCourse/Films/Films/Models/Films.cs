@@ -6,8 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using Films.Helpers;
 
 namespace Films.Models
 {
@@ -36,7 +35,9 @@ namespace Films.Models
                 displayTable.Dispose();
                 displayTable = null;
             }
-            displayTable = GetData("select f.Id, f.Image as ImagePath, f.Name, f.Country, f.Year, d.Name as 'Director' from Films as f join Directors as d on d.Id = f.DirectorId");
+            displayTable = GetData(String.Format(@"select f.Id as '{0}', f.Image as '{1}', f.Name as '{2}', f.Country as '{3}', f.Year as '{4}', d.Name as '{5}' from
+                Films as f join Directors as d on d.Id = f.DirectorId", 
+                ColumnsNameHelper.Id, ColumnsNameHelper.ImagePath, ColumnsNameHelper.Name, ColumnsNameHelper.Country, ColumnsNameHelper.Year, ColumnsNameHelper.Director));
             GetImages();
             
             filmsInformer.InformDataLoaded(GetColumnsToDisplay(displayTable));
@@ -78,7 +79,7 @@ namespace Films.Models
             foreach (KeyValuePair<String, String> pair in searchData)
             {
                 String data = pair.Value.Replace('*', '%').Replace("?", "*");
-                if (pair.Key.Equals("Actor"))
+                if (pair.Key.Equals(ColumnsNameHelper.Actor))
                 {
                     DataTable table = GetData(String.Format("select f.Id from Films as f join ActorFilm as af on f.Id = af.FilmId join Actors as a on af.ActorId = a.Id where a.Name like N'{0}'",
                     data));
@@ -120,23 +121,23 @@ namespace Films.Models
             StringBuilder setStringBuilder = new StringBuilder();
             foreach (KeyValuePair<String, String> pair in updateInfo)
             {
-                if (!pair.Key.Equals("SourceName"))
+                if (!pair.Key.Equals(ColumnsNameHelper.SourceName))
                 {
                     setStringBuilder.AppendFormat("{0} = '{1}',", pair.Key, pair.Value);
                 }
             }
             setStringBuilder.Remove(setStringBuilder.Length - 1, 1);
 
-            SqlDataAdapter updateAdapter = new SqlDataAdapter(String.Format("select * from Films where Name = N'{0}'", updateInfo["SourceName"]), connectionString);
+            SqlDataAdapter updateAdapter = new SqlDataAdapter(String.Format("select * from Films where Name = N'{0}'", updateInfo[ColumnsNameHelper.SourceName]), connectionString);
 
             DataTable filmsToUpdateTable = new DataTable();
             updateAdapter.Fill(filmsToUpdateTable);
 
             foreach (DataRow row in filmsToUpdateTable.Rows)
             {
-                row["Name"] = updateInfo["Name"];
-                row["Country"] = updateInfo["Country"];
-                row["Year"] = updateInfo["Year"];
+                row["Name"] = updateInfo[ColumnsNameHelper.Name];
+                row["Country"] = updateInfo[ColumnsNameHelper.Country];
+                row["Year"] = updateInfo[ColumnsNameHelper.Year];
             }
 
             updateAdapter.UpdateCommand = new SqlCommand("update Films set Name = @Name, Country = @Country, Year = @Year where Id = @Id", new SqlConnection(connectionString));
@@ -151,9 +152,9 @@ namespace Films.Models
             DataRow[] rows = displayTable.Select(String.Format("Name = '{0}'", updateInfo["SourceName"]));
             foreach (DataRow row in rows)
             {
-                row["Name"] = updateInfo["Name"];
-                row["Country"] = updateInfo["Country"];
-                row["Year"] = updateInfo["Year"];
+                row["Name"] = updateInfo[ColumnsNameHelper.Name];
+                row["Country"] = updateInfo[ColumnsNameHelper.Country];
+                row["Year"] = updateInfo[ColumnsNameHelper.Year];
             }
 
             filmsInformer.InformUpdateFinished(GetColumnsToDisplay(displayTable));
@@ -162,7 +163,7 @@ namespace Films.Models
 
         private DataTable GetColumnsToDisplay(DataTable sourceTable)
         {
-            String[] columnsToSelect = new[] { "Image", "Name", "Country", "Year", "Director" };
+            String[] columnsToSelect = new[] { ColumnsNameHelper.Image, ColumnsNameHelper.Name, ColumnsNameHelper.Country, ColumnsNameHelper.Year, ColumnsNameHelper.Director };
             return new DataView(sourceTable).ToTable(false, columnsToSelect);
         }
 
@@ -179,16 +180,16 @@ namespace Films.Models
 
         private void GetImages()
         {
-            displayTable.Columns.Add("Image", typeof(byte[]));
+            displayTable.Columns.Add(ColumnsNameHelper.Image, typeof(byte[]));
             foreach (DataRow dr in displayTable.Rows)
             {
-                String fileName = (String)dr["ImagePath"];
+                String fileName = (String)dr[ColumnsNameHelper.ImagePath];
                 Bitmap bitmap = (Bitmap)Properties.Resources.ResourceManager.GetObject(fileName);
                 if (bitmap == null)
                 {
                     bitmap = Properties.Resources.DefaultImage;
                 }
-                dr["Image"] = BitmapToByteArray(bitmap);
+                dr[ColumnsNameHelper.Image] = BitmapToByteArray(bitmap);
             }
         }
 
