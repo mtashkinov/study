@@ -13,7 +13,7 @@ namespace Films.Models
 {
     internal sealed class Films
     {
-        private DataTable displayTable;
+        private DataTable displayTable = null;
         private IFilmsInformer filmsInformer;
         private const String serverName = @"(localdb)\ProjectsV12";
         private const String databaseName = @"FilmsDatabase";
@@ -24,8 +24,18 @@ namespace Films.Models
             this.filmsInformer = filmsInformer;
         }
 
+        ~Films()
+        {
+            displayTable.Dispose();
+        }
+
         public void LoadData()
         {
+            if (displayTable != null)
+            {
+                displayTable.Dispose();
+                displayTable = null;
+            }
             displayTable = GetData("select f.Id, f.Image as ImagePath, f.Name, f.Country, f.Year, d.Name as 'Director' from Films as f join Directors as d on d.Id = f.DirectorId");
             GetImages();
             
@@ -48,6 +58,8 @@ namespace Films.Models
             deleteAdapter.DeleteCommand = new SqlCommand("delete from Films where Id = @Id", new SqlConnection(connectionString));
             deleteAdapter.DeleteCommand.Parameters.Add("@Id", SqlDbType.Int, 4, "Id");
             deleteAdapter.Update(filmsToDeleteTable);
+            filmsToDeleteTable.Dispose();
+            deleteAdapter.Dispose();
 
             String selectFilmNamesList = String.Format("('{0}')", String.Join("','", filmNamesToDelete));
             DataRow[] rows = displayTable.Select(String.Format("Name in {0}", selectFilmNamesList));
@@ -76,7 +88,8 @@ namespace Films.Models
                     {
                         idList.Add(row[0].ToString());
                     }
-
+                    table.Dispose();
+                   
                     if (idList.Count == 0)
                     {
                         filmsInformer.InformSearchFinished(GetColumnsToDisplay(displayTable.Clone()));
@@ -132,6 +145,8 @@ namespace Films.Models
             updateAdapter.UpdateCommand.Parameters.Add("@Country", SqlDbType.NVarChar, 50, "Country");
             updateAdapter.UpdateCommand.Parameters.Add("@Year", SqlDbType.NVarChar, 50, "Year");
             updateAdapter.Update(filmsToUpdateTable);
+            filmsToUpdateTable.Dispose();
+            updateAdapter.Dispose();
 
             DataRow[] rows = displayTable.Select(String.Format("Name = '{0}'", updateInfo["SourceName"]));
             foreach (DataRow row in rows)
@@ -157,6 +172,7 @@ namespace Films.Models
 
             DataTable table = new DataTable();
             dataAdapter.Fill(table);
+            dataAdapter.Dispose();
 
             return table;
         }
