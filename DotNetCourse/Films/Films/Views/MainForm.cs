@@ -115,7 +115,10 @@ namespace Films.Views
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new AboutForm().ShowDialog();
+            using (AboutForm form = new AboutForm())
+            {
+                form.ShowDialog();
+            }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
