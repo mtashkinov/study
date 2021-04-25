@@ -1,0 +1,13 @@
+First -> id=First
+First -> Expr
+Expr -> Term('+' | '-')Term*
+Term -> Degree('*' | '/')Degree*
+Degree -> Factor^Degree
+Degree -> Factor
+Factor -> Prime
+Factor -> -Prime
+Prime -> id
+Prime -> (First)
+Prime -> number
+Prime -> Function
+Function -> id(First* (,))
